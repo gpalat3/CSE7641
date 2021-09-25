@@ -2,11 +2,49 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1f7ebbae-d5f6-4e8d-9969-9157652528b8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AdaBoost.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DecisionTree.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KNN.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SVMLinear.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SVMrbf.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gpalat3-analysis.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plots/Ada_Learning_Curve_Accuracy_adult.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plots/Ada_Learning_Curve_Accuracy_car.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plots/Ada_Learning_Curve_MSE_adult.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plots/Ada_Learning_Curve_MSE_car.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plots/Ada_Validation_Curve_adult.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plots/Ada_Validation_Curve_car.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plots/KNN_Learning_Curve_Accuracy_adult.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plots/KNN_Learning_Curve_Accuracy_car.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plots/KNN_Learning_Curve_MSE_adult.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plots/KNN_Learning_Curve_MSE_car.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plots/KNN_Validation_Curve_adult.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plots/KNN_Validation_Curve_car.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plots/MLP_Loss_Curve_adult.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plots/MLP_Loss_Curve_car.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plots/MLP_Validation_Curve_adult.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plots/MLP_Validation_Curve_car.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plots/SVM_Learning_Curve_Accuracy_linear_adult.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plots/SVM_Learning_Curve_Accuracy_linear_car.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plots/SVM_Learning_Curve_Accuracy_rbf_adult.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plots/SVM_Learning_Curve_Accuracy_rbf_car.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plots/SVM_Learning_Curve_MSE_linear_adult.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plots/SVM_Learning_Curve_MSE_linear_car.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plots/SVM_Learning_Curve_MSE_rbf_adult.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plots/SVM_Learning_Curve_MSE_rbf_car.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plots/SVM_Validation_Curve_adult - Copy.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plots/SVM_Validation_Curve_linear_adult.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plots/SVM_Validation_Curve_linear_car.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plots/SVM_Validation_Curve_rbf_1000_car.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/~$alat3-analysis.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/~WRL0003.tmp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NeuralNetwork.py" beforeDir="false" afterPath="$PROJECT_DIR$/NeuralNetwork.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SupervisedLearning.py" beforeDir="false" afterPath="$PROJECT_DIR$/SupervisedLearning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/DT_Learning_Curve_adult.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/DT_Learning_Curve_car.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plots/DT_Learning_Curve_Accuracy_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/plots/DT_Learning_Curve_Accuracy_adult.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plots/DT_Learning_Curve_Accuracy_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/plots/DT_Learning_Curve_Accuracy_car.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plots/DT_Learning_Curve_MSE_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/plots/DT_Learning_Curve_MSE_adult.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plots/DT_Learning_Curve_MSE_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/plots/DT_Learning_Curve_MSE_car.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plots/DT_Validation_Curve_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/plots/DT_Validation_Curve_adult.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plots/DT_Validation_Curve_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/plots/DT_Validation_Curve_car.png" afterDir="false" />
     </list>
@@ -26,19 +64,28 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="1xhLLPIWeGuS0sDI94CPSvhRPkw" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.SupervisedLearning (1)">
-    <configuration name="SupervisedLearning (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\OMSCS\ML\HW1" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.SVMrbf">
+    <configuration name="AdaBoost" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="HW1" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -50,7 +97,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SupervisedLearning.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AdaBoost.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -59,7 +106,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="SupervisedLearning" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="DecisionTree" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="HW1" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -71,7 +118,70 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SupervisedLearning" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DecisionTree.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="KNN" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="HW1" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/KNN.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="SVMLinear" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="HW1" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SVMLinear.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="SVMrbf" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="HW1" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SVMrbf.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -82,8 +192,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.SupervisedLearning (1)" />
-        <item itemvalue="Python.SupervisedLearning" />
+        <item itemvalue="Python.SVMrbf" />
+        <item itemvalue="Python.DecisionTree" />
+        <item itemvalue="Python.SVMLinear" />
+        <item itemvalue="Python.AdaBoost" />
+        <item itemvalue="Python.KNN" />
       </list>
     </recent_temporary>
   </component>
@@ -110,29 +223,46 @@
       <option name="presentableId" value="Default" />
       <updated>1630802316214</updated>
     </task>
+    <task id="LOCAL-00001" summary="commit">
+      <created>1632168991644</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1632168991644</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit" />
   </component>
   <component name="WindowStateProjectService">
     <state x="693" y="344" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1630804592341">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="693" y="344" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1630804592341" />
-    <state width="1899" height="295" key="GridCell.Tab.0.bottom" timestamp="1631675202307">
+    <state x="614" y="135" key="CommitChangelistDialog2" timestamp="1632168990496">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1899" height="295" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1631675202307" />
-    <state width="1899" height="295" key="GridCell.Tab.0.center" timestamp="1631675202307">
+    <state x="614" y="135" key="CommitChangelistDialog2/0.0.1920.1080@0.0.1920.1080" timestamp="1632168990496" />
+    <state width="1899" height="295" key="GridCell.Tab.0.bottom" timestamp="1632594793300">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1899" height="295" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1631675202307" />
-    <state width="1899" height="295" key="GridCell.Tab.0.left" timestamp="1631675202307">
+    <state width="1899" height="295" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1632594793300" />
+    <state width="1899" height="295" key="GridCell.Tab.0.center" timestamp="1632594793300">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1899" height="295" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1631675202307" />
-    <state width="1899" height="295" key="GridCell.Tab.0.right" timestamp="1631675202307">
+    <state width="1899" height="295" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1632594793300" />
+    <state width="1899" height="295" key="GridCell.Tab.0.left" timestamp="1632594793300">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1899" height="295" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1631675202307" />
+    <state width="1899" height="295" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1632594793300" />
+    <state width="1899" height="295" key="GridCell.Tab.0.right" timestamp="1632594793300">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1899" height="295" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1632594793300" />
     <state width="1899" height="363" key="GridCell.Tab.1.bottom" timestamp="1631485533171">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -153,5 +283,9 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="461" y="183" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1630804085811" />
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1632187427491">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1632187427491" />
   </component>
 </project>

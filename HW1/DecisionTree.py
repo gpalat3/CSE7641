@@ -1,17 +1,11 @@
 import pandas as pd
 import numpy as np
-import tensorflow
 import math
 import time
 import matplotlib.pyplot as plt
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split, learning_curve, cross_val_score, GridSearchCV
 from sklearn import metrics
-from sklearn.neural_network import MLPClassifier
-from keras.models import Sequential
-from keras.layers import Dense
-from keras.wrappers.scikit_learn import KerasClassifier
-
 pd.options.mode.chained_assignment = None
 
 def loadAdultData(filename, col_names):
@@ -66,10 +60,10 @@ def mlModel(clf, X_train, X_test, y_train, y_test):
     rmse_train = math.sqrt(metrics.mean_squared_error(y_train, y_pred_train))
     return y_pred, y_pred_train, dt_learn_tm, dt_query_tm, dt_query_tm_train, rmse, rmse_train
 
-def runDTCurves(depth, X_train, y_train, dataset):
+def runDTCurves(depth, max_depth, criterion, X_train, y_train, dataset):
     print('Calculating Learning Curve Accuracy for ' + dataset)
     train_sizes, train_scores_lc, test_scores_lc, fit_times_lc, _ = learning_curve(
-        DecisionTreeClassifier(random_state=99), X_train, y_train, cv=5,
+        DecisionTreeClassifier(random_state=99, max_depth=max_depth, criterion=criterion), X_train, y_train, cv=5,
         scoring='accuracy', n_jobs=-1,
         train_sizes=np.linspace(0.1, 1.0, 40), shuffle=True,
         return_times=True)
@@ -86,7 +80,7 @@ def runDTCurves(depth, X_train, y_train, dataset):
     print("--------------------------------")
     print('Calculating Learning Curve MSE for ' + dataset)
     train_sizes, train_scores_lc, test_scores_lc = learning_curve(
-        DecisionTreeClassifier(random_state=99), X_train, y_train, cv=5,
+        DecisionTreeClassifier(random_state=99, max_depth=max_depth, criterion=criterion), X_train, y_train, cv=5,
         scoring='neg_mean_squared_error', n_jobs=-1,
         train_sizes=np.linspace(0.1, 1.0, 40), shuffle=True)
     train_scores_lc_mean = -np.mean(train_scores_lc, axis=1)
@@ -100,25 +94,39 @@ def runDTCurves(depth, X_train, y_train, dataset):
     print('Finished plotting Learning Curve MSE decision tree for ' + dataset)
     print("--------------------------------")
     print('Calculating cross val score for incremental tree depth for ' + dataset)
-    scores_cv = []
-    scores_mean_cv = []
-    train_acc_cv = []
+    scores_cv_gini = []
+    scores_mean_cv_gini = []
+    train_acc_cv_gini = []
     for i in depth:
-        clf_DT = DecisionTreeClassifier(max_depth=i)
-        scores = cross_val_score(clf_DT, X_train, y_train, cv=5, scoring='accuracy')
-        DT = clf_DT.fit(X_train, y_train)
-        acc = DT.score(X_train, y_train)
-        scores_cv.append(scores)
-        scores_mean_cv.append(scores.mean())
-        train_acc_cv.append(acc)
-    scores_mean_cv = np.array(scores_mean_cv)
-    train_acc_cv = np.array(train_acc_cv)
+        clf = DecisionTreeClassifier(max_depth=i, criterion='gini')
+        scores_gini = cross_val_score(clf, X_train, y_train, cv=5, scoring='accuracy')
+        clf.fit(X_train, y_train)
+        acc = clf.score(X_train, y_train)
+        scores_cv_gini.append(scores_gini)
+        scores_mean_cv_gini.append(scores_gini.mean())
+        train_acc_cv_gini.append(acc)
+    scores_mean_cv_gini = np.array(scores_mean_cv_gini)
+    train_acc_cv_gini = np.array(train_acc_cv_gini)
+    scores_cv_entropy = []
+    scores_mean_cv_entropy = []
+    train_acc_cv_entropy = []
+    for i in depth:
+        clf = DecisionTreeClassifier(max_depth=i, criterion='entropy')
+        scores_entropy = cross_val_score(clf, X_train, y_train, cv=5, scoring='accuracy')
+        clf.fit(X_train, y_train)
+        acc = clf.score(X_train, y_train)
+        scores_cv_entropy.append(scores_entropy)
+        scores_mean_cv_entropy.append(scores_entropy.mean())
+        train_acc_cv_entropy.append(acc)
+    scores_mean_cv_entropy = np.array(scores_mean_cv_entropy)
+    train_acc_cv_entropy = np.array(train_acc_cv_entropy)
     savefile = 'plots/DT_Validation_Curve_' + dataset + '.png'
-    label1, label2, title, xlabel, ylabel = ['Training Score', 'Cross Validation Score', 'Validation Curve',
+    label1, label2, title, xlabel, ylabel = ['Training Score', 'Cross Validation Score', 'Validation Curve ' + dataset,
                                              'Depth Of Tree', 'Accuracy']
     print('Started plotting Validation Curve for decision tree for ' + dataset)
-    plotValidationCurve(depth, scores_mean_cv, train_acc_cv, label1, label2, title, xlabel, ylabel, savefile)
+    plotValidationCurve(depth, scores_mean_cv_gini, train_acc_cv_gini, scores_mean_cv_entropy, train_acc_cv_entropy, label1, label2, title, xlabel, ylabel, savefile)
     print('Finished plotting Validation Curve for decision tree for ' + dataset)
+    print("--------------------------------")
 
 def plotLearningCurve(train_sizes, train_scores_mean, test_scores_mean,
                         label1, label2, title, xlabel, ylabel, savefile):
@@ -131,42 +139,17 @@ def plotLearningCurve(train_sizes, train_scores_mean, test_scores_mean,
     plt.legend(loc='best')
     plt.savefig(savefile)
 
-def plotFitTimes():
-    return None
-
-def plotValidationCurve(depth, scores_mean_cv, train_acc_cv, label1, label2, title, xlabel, ylabel, savefile):
+def plotValidationCurve(depth, scores_mean_cv_gini, train_acc_cv_gini, scores_mean_cv_entropy, train_acc_cv_entropy, label1, label2, title, xlabel, ylabel, savefile):
     plt.figure()
     plt.title(title)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
-    plt.plot(depth, train_acc_cv, 'o-', label=label1, color='blue')
-    plt.plot(depth, scores_mean_cv, 'o-', label=label2, color='green')
+    plt.plot(depth, train_acc_cv_gini, 'o-', label=label1 + ' gini', color='blue')
+    plt.plot(depth, scores_mean_cv_gini, 'o-', label=label2 + ' gini', color='green')
+    plt.plot(depth, train_acc_cv_entropy, 'o-', label=label1 + ' entropy', color='purple')
+    plt.plot(depth, scores_mean_cv_entropy, 'o-', label=label2 + ' entropy', color='red')
     plt.legend(loc='best')
     plt.savefig(savefile)
-
-def kerasMLP():
-    model = Sequential()
-    model.add(Dense(units=input_units, input_shape=(input_units,), activation='relu'))
-    model.add(Dense(units=hidden_layers, activation='relu'))
-    model.add(Dense(units=1, activation='sigmoid'))
-    model.compile(loss='mean_squared_error', optimizer='adam', metrics=['accuracy'])
-    return model
-
-def plotCurves(train_scores, test_scores, label1, label2, title, xlabel, ylabel, savefile):
-    plt.figure()
-    plt.title(title)
-    plt.xlabel(xlabel)
-    plt.ylabel(ylabel)
-    plt.plot(train_scores, 'o-', label=label1, color='blue')
-    plt.plot(test_scores, 'o-', label=label2, color='green')
-    plt.legend(loc='best')
-    plt.savefig(savefile)
-
-def globalVar(X_train):
-    global input_units
-    global hidden_layers
-    input_units = X_train.shape[1]
-    hidden_layers = 100
 
 if __name__ == '__main__':
     col_names_car = ['buying_cost', 'maintenance_cost', 'doors', 'persons', 'lug_boot', 'safety', 'class']
@@ -178,34 +161,29 @@ if __name__ == '__main__':
                                                                         random_state=99)
     X_train_2, X_test_2, y_train_2, y_test_2 = train_test_split(X_2, y_2, test_size=0.3,
                                                                         random_state=99)
-    clf_DT = DecisionTreeClassifier(random_state=99)
-    y_pred_1_dt, y_pred_train_1_dt, learn_tm_1_dt, query_tm_1_dt, query_tm_train_1_dt, rmse_1_dt, rmse_train_1_dt = mlModel(clf_DT,
+    clf = DecisionTreeClassifier(random_state=99)
+    y_pred_1_dt, y_pred_train_1_dt, learn_tm_1_dt, query_tm_1_dt, query_tm_train_1_dt, rmse_1_dt, rmse_train_1_dt = mlModel(clf,
                                                                                                        X_train_1,
                                                                                                        X_test_1,
                                                                                                        y_train_1,
                                                                                                        y_test_1)
-    y_pred_2_dt, y_pred_train_2_dt, learn_tm_2_dt, query_tm_2_dt, query_tm_train_2_dt, rmse_2_dt, rmse_train_2_dt = mlModel(clf_DT,
+    y_pred_2_dt, y_pred_train_2_dt, learn_tm_2_dt, query_tm_2_dt, query_tm_train_2_dt, rmse_2_dt, rmse_train_2_dt = mlModel(clf,
                                                                                                        X_train_2,
                                                                                                        X_test_2,
                                                                                                        y_train_2,
                                                                                                        y_test_2)
     depth = range(1, 36)
-    runDTCurves(depth, X_train_1, y_train_1, dataset='car')
-    runDTCurves(depth, X_train_2, y_train_2, dataset='adult')
     grid_param = {'max_depth': depth, 'criterion': ['gini', 'entropy']}
-    grid_best_params_car, grid_best_estimator_car, grid_best_score_car = gridSearch(grid_param, clf_DT, X_train_1, y_train_1, scoring='accuracy', dataset='car')
-    print(grid_best_params_car, grid_best_estimator_car, grid_best_score_car)
-    grid_best_params_adult, grid_best_estimator_adult, grid_best_score_adult = gridSearch(grid_param, clf_DT, X_train_2, y_train_2, scoring='accuracy', dataset='adult')
-    print(grid_best_params_adult, grid_best_estimator_adult, grid_best_score_adult)
-    best_params_car = {'max_depth': grid_best_params_car['max_depth'], 'criterion': grid_best_params_car['criterion']}
-    best_params_adult = {'max_depth': grid_best_params_adult['max_depth'], 'criterion': grid_best_params_adult['criterion']}
-    print(best_params_car)
-    print(best_params_adult)
-    #clf_DT = DecisionTreeClassifier(max_depth=grid_best_params_car['max_depth'], criterion=grid_best_params_car['criterion'])
-    clf_DT = DecisionTreeClassifier(max_depth=grid_best_params_car['max_depth'],
-                                    criterion='gini')
+    grid_best_params_1, grid_best_estimator_1, grid_best_score_1 = gridSearch(grid_param, clf, X_train_1, y_train_1, scoring='accuracy', dataset='car')
+    print(grid_best_params_1, grid_best_estimator_1, grid_best_score_1)
+    grid_best_params_2, grid_best_estimator_2, grid_best_score_2 = gridSearch(grid_param, clf, X_train_2, y_train_2, scoring='accuracy', dataset='adult')
+    print(grid_best_params_2, grid_best_estimator_2, grid_best_score_2)
+    max_depth = grid_best_params_1['max_depth']
+    criterion = grid_best_params_1['criterion']
+    clf = DecisionTreeClassifier(max_depth=max_depth, criterion=criterion)
+    runDTCurves(depth, max_depth, criterion, X_train_1, y_train_1, dataset='car')
     y_pred_1_hyper_dt, y_pred_train_1_hyper_dt, learn_tm_1_hyper_dt, query_tm_1_hyper_dt, query_tm_train_1_hyper_dt, rmse_1_hyper_dt, rmse_train_1_hyper_dt = mlModel(
-        clf_DT,
+        clf,
         X_train_1,
         X_test_1,
         y_train_1,
@@ -224,8 +202,12 @@ if __name__ == '__main__':
     print("DT Hypertuning Query Time Dataset 1:", query_tm_1_hyper_dt)
     print("--------------------------------")
     print("--------------------------------")
+    max_depth = grid_best_params_2['max_depth']
+    criterion = grid_best_params_2['criterion']
+    clf = DecisionTreeClassifier(max_depth=max_depth, criterion=criterion)
+    runDTCurves(depth, max_depth, criterion, X_train_2, y_train_2, dataset='adult')
     y_pred_2_hyper_dt, y_pred_train_2_hyper_dt, learn_tm_2_hyper_dt, query_tm_2_hyper_dt, query_tm_train_2_hyper_dt, rmse_2_hyper_dt, rmse_train_2_hyper_dt = mlModel(
-        clf_DT,
+        clf,
         X_train_2,
         X_test_2,
         y_train_2,
@@ -242,3 +224,39 @@ if __name__ == '__main__':
     print("DT Hypertuning Query Time Dataset 2:", query_tm_2_hyper_dt)
     print("--------------------------------")
     print("--------------------------------")
+
+
+'''
+Result:
+
+Grid Search for dataset car
+{'criterion': 'entropy', 'max_depth': 7} DecisionTreeClassifier(criterion='entropy', max_depth=7, random_state=99) 0.740303830458489
+Grid Search for dataset adult
+{'criterion': 'gini', 'max_depth': 7} DecisionTreeClassifier(max_depth=7, random_state=99) 0.8374431338096457
+--------------------------------
+--------------------------------
+DT Accuracy Dataset 1: Out Sample 0.7630057803468208
+DT Accuracy Dataset 1: In Sample 0.8081058726220016
+DT Learning Time Dataset 1: 0.0
+DT Query Time Dataset 1: 0.015632152557373047
+DT Hypertuning Accuracy Dataset 1: Out Sample 0.7842003853564548
+DT Hypertuning Accuracy Dataset 1: In Sample 0.7990074441687345
+DT Hypertuning RMSE Dataset 1: Out Sample 0.6898660895999755
+DT Hypertuning RMSE Dataset 1: In Sample 0.6962026268273651
+DT Hypertuning Learning Time Dataset 1: 0.0
+DT Hypertuning Query Time Dataset 1: 0.0
+--------------------------------
+--------------------------------
+DT Accuracy Dataset 2: Out Sample 0.820247722387143
+DT Accuracy Dataset 2: In Sample 0.9013250263250263
+DT Learning Time Dataset 2: 0.21630048751831055
+DT Query Time Dataset 2: 0.0
+DT Hypertuning Accuracy Dataset 2: Out Sample 0.8343740403316614
+DT Hypertuning Accuracy Dataset 2: In Sample 0.8426640926640927
+DT Hypertuning RMSE Dataset 2: Out Sample 0.40697169393993315
+DT Hypertuning RMSE Dataset 2: In Sample 0.3966559054595145
+DT Hypertuning Learning Time Dataset 2: 0.10306334495544434
+DT Hypertuning Query Time Dataset 2: 0.01038670539855957
+--------------------------------
+--------------------------------
+'''
