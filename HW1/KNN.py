@@ -155,9 +155,10 @@ if __name__ == '__main__':
     y_pred_2_knn, y_pred_train_2_knn, learn_tm_2_knn, query_tm_2_knn, query_tm_train_2_knn, rmse_2_knn, rmse_train_2_knn = mlModel(
         clf, X_train_2, X_test_2, y_train_2, y_test_2)
     k = range(1, 36)
+    p = [1, 2, 3, 4, 5]
     runKnnCurves(k, X_train_1, y_train_1, dataset='car')
     runKnnCurves(k, X_train_2, y_train_2, dataset='adult')
-    grid_param = {'n_neighbors': k}
+    grid_param = {'n_neighbors': k, 'p': p}
     grid_best_params_1, grid_best_estimator_1, grid_best_score_1 = gridSearch(grid_param, clf, X_train_1,
                                                                               y_train_1, scoring='accuracy',
                                                                               dataset='car')
@@ -167,11 +168,11 @@ if __name__ == '__main__':
                                                                               y_train_2, scoring='accuracy',
                                                                               dataset='adult')
     print('Grid search results for dataset 2: ', grid_best_params_2, grid_best_estimator_2, grid_best_score_2)
-    clf = KNeighborsClassifier(n_neighbors=grid_best_params_1['n_neighbors'])
+    clf = KNeighborsClassifier(n_neighbors=grid_best_params_1['n_neighbors'], p=grid_best_params_1['p'])
     print('Getting scores for dataset 1 with best params ')
     y_pred_1_hyper_knn, y_pred_train_1_hyper_knn, learn_tm_1_hyper_knn, query_tm_1_hyper_knn, query_tm_train_1_hyper_knn, rmse_1_hyper_knn, rmse_train_1_hyper_knn = mlModel(
         clf, X_train_1, X_test_1, y_train_1, y_test_1)
-    clf = KNeighborsClassifier(n_neighbors=grid_best_params_2['n_neighbors'])
+    clf = KNeighborsClassifier(n_neighbors=grid_best_params_2['n_neighbors'], p=grid_best_params_2['p'])
     print('Getting scores for dataset 2 with best params ')
     y_pred_2_hyper_knn, y_pred_train_2_hyper_knn, learn_tm_2_hyper_knn, query_tm_2_hyper_knn, query_tm_train_2_hyper_knn, rmse_2_hyper_knn, rmse_train_2_hyper_knn = mlModel(
         clf, X_train_2, X_test_2, y_train_2, y_test_2)
@@ -192,7 +193,7 @@ if __name__ == '__main__':
 '''
 Result: 
 
-Grid search results for dataset 1:  {'n_neighbors': 1} KNeighborsClassifier(n_neighbors=1) 0.7427523061623401
+Grid search results for dataset 1:  {'n_neighbors': 1, 'p': 1} KNeighborsClassifier(n_neighbors=1, p=1) 0.7427523061623401
 Started grid Search for dataset adult
 Ended grid Search for dataset adult
 Grid search results for dataset 2:  {'n_neighbors': 16} KNeighborsClassifier(n_neighbors=16) 0.8403828368556917

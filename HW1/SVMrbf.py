@@ -149,7 +149,8 @@ if __name__ == '__main__':
     X_train_2, X_test_2, y_train_2, y_test_2 = train_test_split(X_2, y_2, test_size=0.3,
                                                                         random_state=99)
     kernel = 'rbf'
-    clf = SVC(random_state=99, kernel=kernel, max_iter=5000)
+    max_iter = 100
+    clf = SVC(random_state=99, kernel=kernel, max_iter=max_iter)
     print('Getting scores for dataset 1 ')
     y_pred_1_svm_rbf, y_pred_train_1_svm_rbf, learn_tm_1_svm_rbf, query_tm_1_svm_rbf, query_tm_train_1_svm_rbf, rmse_1_svm_rbf, rmse_train_1_svm_rbf = mlModel(
         clf, X_train_1, X_test_1, y_train_1, y_test_1)
@@ -161,7 +162,7 @@ if __name__ == '__main__':
 
     #grid_param = {'C': [0.25, 0.5, 0.75, 1, 1.25, 1.5, 2, 2.5, 3, 5, 10, 20, 50, 100], 'class_weight': ['dict', 'balanced'], 'kernel': ['linear', 'poly', 'rbf']}
     grid_param = {'C': [0.25, 0.5, 0.75, 1, 1.25, 1.5, 2, 2.5, 3],
-                  'class_weight': [None, 'balanced'], 'max_iter': [1, 10, 100, 1000, 2000, 5000, 10000]}
+                  'class_weight': [None, 'balanced'], 'max_iter': [1, 10, 100]}
     grid_best_params_1, grid_best_estimator_1, grid_best_score_1 = gridSearch(grid_param, clf, X_train_1, y_train_1,
                                                                               scoring='accuracy', dataset='car')
     grid_best_params_2, grid_best_estimator_2, grid_best_score_2 = gridSearch(grid_param, clf, X_train_2, y_train_2,
