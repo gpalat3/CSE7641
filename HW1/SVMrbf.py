@@ -224,33 +224,32 @@ if __name__ == '__main__':
 Result: 
 
 Grid Search for dataset car
-{'C': 0.75, 'class_weight': 'balanced', 'max_iter': 1000} SVC(C=0.75, class_weight='balanced', kernel='linear', max_iter=1000,
-    random_state=99) 0.744408627962004
+{'C': 0.75, 'class_weight': None, 'max_iter': 100} SVC(C=0.75, max_iter=100, random_state=99) 0.7286924316724392
+
 Grid Search for dataset adult
-{'C': 1.25, 'class_weight': 'balanced', 'max_iter': 10} SVC(C=1.25, class_weight='balanced', kernel='linear', max_iter=10,
-    random_state=99) 0.6443422934888783
+{'C': 0.25, 'class_weight': None, 'max_iter': 10} SVC(C=0.25, max_iter=10, random_state=99) 0.5219196684183897
 --------------------------------
-SVM RBF Accuracy Dataset 1: Out Sample 0.7803468208092486
-SVM RBF Accuracy Dataset 1: In Sample 0.7973531844499586
-SVM RBF Learning Time Dataset 1: 0.031317710876464844
-SVM RBF Query Time Dataset 1: 0.0
-SVM RBF Hypertuning Accuracy Dataset 1: Out Sample 0.8073217726396917
-SVM RBF Hypertuning Accuracy Dataset 1: In Sample 0.7965260545905707
-SVM RBF Hypertuning RMSE Dataset 1: Out Sample 0.6525479924620727
-SVM RBF Hypertuning RMSE Dataset 1: In Sample 0.6926292792287919
-SVM RBF Hypertuning Learning Time Dataset 1: 0.04686856269836426
-SVM RBF Hypertuning Query Time Dataset 1: 0.0
+SVM RBF Accuracy Dataset 1: Out Sample 0.7167630057803468
+SVM RBF Accuracy Dataset 1: In Sample 0.7568238213399504
+SVM RBF Learning Time Dataset 1: 0.031280517578125
+SVM RBF Query Time Dataset 1: 0.015629291534423828
+SVM RBF Hypertuning Accuracy Dataset 1: Out Sample 0.7109826589595376
+SVM RBF Hypertuning Accuracy Dataset 1: In Sample 0.7543424317617866
+SVM RBF Hypertuning RMSE Dataset 1: Out Sample 0.7925471728513105
+SVM RBF Hypertuning RMSE Dataset 1: In Sample 0.7405316311773545
+SVM RBF Hypertuning Learning Time Dataset 1: 0.03023672103881836
+SVM RBF Hypertuning Query Time Dataset 1: 0.01015925407409668
 --------------------------------
-SVM Linear Accuracy Dataset 2: Out Sample 0.2342102569352032
-SVM Linear Accuracy Dataset 2: In Sample 0.231002106002106
-SVM Linear Learning Time Dataset 2: 2.1061229705810547
-SVM Linear Query Time Dataset 2: 0.5155999660491943
-SVM Linear Hypertuning Accuracy Dataset 2: Out Sample 0.34947282219265025
-SVM Linear Hypertuning Accuracy Dataset 2: In Sample 0.35499297999298
-SVM Linear Hypertuning RMSE Dataset 2: Out Sample 0.8065526503628575
-SVM Linear Hypertuning RMSE Dataset 2: In Sample 0.80312329066403
-SVM Linear Hypertuning Learning Time Dataset 2: 0.10937738418579102
-SVM Linear Hypertuning Query Time Dataset 2: 0.031207561492919922
+SVM RBF Accuracy Dataset 2: Out Sample 0.19981574367898455
+SVM RBF Accuracy Dataset 2: In Sample 0.20024570024570024
+SVM RBF Learning Time Dataset 2: 0.9330954551696777
+SVM RBF Query Time Dataset 2: 0.2848351001739502
+SVM RBF Hypertuning Accuracy Dataset 2: Out Sample 0.3407718292558092
+SVM RBF Hypertuning Accuracy Dataset 2: In Sample 0.342005967005967
+SVM RBF Hypertuning RMSE Dataset 2: Out Sample 0.8119286734339358
+SVM RBF Hypertuning RMSE Dataset 2: In Sample 0.811168313603307
+SVM RBF Hypertuning Learning Time Dataset 2: 0.15285134315490723
+SVM RBF Hypertuning Query Time Dataset 2: 0.04055380821228027
 --------------------------------
 --------------------------------
 '''
