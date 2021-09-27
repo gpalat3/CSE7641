@@ -3,9 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="1f7ebbae-d5f6-4e8d-9969-9157652528b8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HW1 Scores.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/HW1 Scores.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KNN.py" beforeDir="false" afterPath="$PROJECT_DIR$/KNN.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gpalat3-analysis.docx" beforeDir="false" afterPath="$PROJECT_DIR$/gpalat3-analysis.docx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gpalat3-analysis.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/gpalat3-analysis.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/~$alat3-analysis.docx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

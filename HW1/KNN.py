@@ -204,20 +204,31 @@ Result:
 Grid search results for dataset 1:  {'n_neighbors': 1, 'p': 1} KNeighborsClassifier(n_neighbors=1, p=1) 0.7427523061623401
 Started grid Search for dataset adult
 Ended grid Search for dataset adult
-Grid search results for dataset 2:  {'n_neighbors': 16} KNeighborsClassifier(n_neighbors=16) 0.8403828368556917
+Grid search results for dataset 2:  {'n_neighbors': 16, 'p': 1} KNeighborsClassifier(n_neighbors=16, p=1) 0.842006124950806
 Getting scores for dataset 1 with best params 
 Getting scores for dataset 2 with best params 
 --------------------------------
 --------------------------------
 KNN Accuracy Dataset 1: Out Sample 0.7572254335260116
 KNN Accuracy Dataset 1: In Sample 0.7899090157154673
+KNN Learning Time Dataset 1: 0.0
+KNN Query Time Dataset 1: 0.03124690055847168
 KNN Hypertuning Accuracy Dataset 1: Out Sample 0.7552986512524085
 KNN Hypertuning Accuracy Dataset 1: In Sample 0.7568238213399504
+KNN Hypertuning Learning Time Dataset 1: 0.015566825866699219
+KNN Hypertuning Query Time Dataset 1: 0.015657663345336914
 --------------------------------
 KNN Accuracy Dataset 2: Out Sample 0.8243423072985976
 KNN Accuracy Dataset 2: In Sample 0.8563969813969814
-KNN Hypertuning Accuracy Dataset 2: Out Sample 0.8410277408127751
-KNN Hypertuning Accuracy Dataset 2: In Sample 0.8515268515268515
+KNN Learning Time Dataset 1: 1.6232271194458008
+KNN Query Time Dataset 1: 7.58191442489624
+KNN Hypertuning Accuracy Dataset 2: Out Sample 0.8405159176988433
+KNN Hypertuning Accuracy Dataset 2: In Sample 0.8527114777114777
+KNN Hypertuning Learning Time Dataset 1: 1.375173807144165
+KNN Hypertuning Query Time Dataset 1: 6.926799058914185
 --------------------------------
 --------------------------------
+
+Process finished with exit code 0
+
 '''
