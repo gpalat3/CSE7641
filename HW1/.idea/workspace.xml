@@ -2,11 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1f7ebbae-d5f6-4e8d-9969-9157652528b8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../HW2/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HW2/.idea/HW2.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HW2/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HW2/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HW2/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HW2/.idea/rSettings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HW2/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HW2/DecisionTree.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HW2/FourPeaks.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HW2/NeuralNetwork.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HW2/data/adult/adult.names" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HW2/data/adult/adult.test" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HW2/data/adult/adult_data.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HW2/data/adult/old.adult.names" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HW2/data/car_evaluation/car.c45-names" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HW2/data/car_evaluation/car.data" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HW2/data/car_evaluation/car.names" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HW2/data/car_evaluation/car_data.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HW2/plots/FourPeaks.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HW1 Scores.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/HW1 Scores.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KNN.py" beforeDir="false" afterPath="$PROJECT_DIR$/KNN.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpalat3-analysis.docx" beforeDir="false" afterPath="$PROJECT_DIR$/gpalat3-analysis.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpalat3-analysis.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/gpalat3-analysis.pdf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,22 +222,22 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="614" y="135" key="CommitChangelistDialog2/0.0.1920.1080@0.0.1920.1080" timestamp="1632168990496" />
-    <state width="1899" height="295" key="GridCell.Tab.0.bottom" timestamp="1632698881160">
+    <state width="1899" height="295" key="GridCell.Tab.0.bottom" timestamp="1632778686447">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1899" height="295" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1632698881160" />
-    <state width="1899" height="295" key="GridCell.Tab.0.center" timestamp="1632698881160">
+    <state width="1899" height="295" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1632778686447" />
+    <state width="1899" height="295" key="GridCell.Tab.0.center" timestamp="1632778686447">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1899" height="295" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1632698881160" />
-    <state width="1899" height="295" key="GridCell.Tab.0.left" timestamp="1632698881160">
+    <state width="1899" height="295" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1632778686447" />
+    <state width="1899" height="295" key="GridCell.Tab.0.left" timestamp="1632778686447">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1899" height="295" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1632698881160" />
-    <state width="1899" height="295" key="GridCell.Tab.0.right" timestamp="1632698881160">
+    <state width="1899" height="295" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1632778686447" />
+    <state width="1899" height="295" key="GridCell.Tab.0.right" timestamp="1632778686447">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1899" height="295" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1632698881160" />
+    <state width="1899" height="295" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1632778686447" />
     <state width="1899" height="363" key="GridCell.Tab.1.bottom" timestamp="1631485533171">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
