@@ -117,7 +117,7 @@ def plotRunnerCurves(x1, y1, x2, y2, x3, y3, x4, y4, title, xlabel, ylabel, save
 
 if __name__ == '__main__':
     fitness_fn = mlrose_hiive.FlipFlop()
-    problem_size = range(10, 201, 10)
+    problem_size = range(10, 101, 10)
     fitness_rhc, times_rhc, stats_rhc, curves_rhc = randomHillClimb(fitness_fn, problem_size)
     fitness_sa, times_sa, stats_sa, curves_sa = simulatedAnnealing(fitness_fn, problem_size)
     fitness_ga, times_ga, stats_ga, curves_ga = geneticAlg(fitness_fn, problem_size)

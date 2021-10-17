@@ -127,7 +127,7 @@ def plotRunnerCurves(x1, y1, x2, y2, x3, y3, x4, y4, title, xlabel, ylabel, save
     plt.savefig(savefile)
 
 if __name__ == '__main__':
-    problem_size = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200]
+    problem_size = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
     weights = {}
     values = {}
     np.random.seed(99)
