@@ -4,7 +4,7 @@ import time
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler, MinMaxScaler, OneHotEncoder
 from sklearn.model_selection import train_test_split
-from sklearn.decomposition import PCA
+from sklearn.decomposition import LatentDirichletAllocation
 from sklearn import metrics
 pd.options.mode.chained_assignment = None
 
@@ -45,7 +45,7 @@ def pcaFunc(no_features, X, y, dataset, random_seed):
         print('Feature No.: ', i)
         pca = PCA(n_components=i, random_state=random_seed)
         fit_start_tm = time.time()
-        pca.fit(X)
+        pca.fit(X, y)
         fit_end_tm = time.time()
         fit_tm = fit_end_tm - fit_start_tm
         fit_time.append(fit_tm)
@@ -55,11 +55,11 @@ def pcaFunc(no_features, X, y, dataset, random_seed):
                                                              'Variance', 'Explained Variance',
                                                              'Cumulative Variance']
     savefile = 'plots/PCA_Variance_' + dataset + '.png'
-    print("Plotting %s for dataset %s " % (title, dataset))
+    print("Plotting % for dataset % ", title, dataset)
     plotVarCurves(no_features, variance, cum_variance, title, xlabel, ylabel, label1, label2, savefile)
     title, xlabel, ylabel = ['PCA Fit Times - ' + dataset, 'Number Of Components', 'Fit Time']
     savefile = 'plots/PCA_fit_times_' + dataset + '.png'
-    print("Plotting %s for dataset %s " % (title, dataset))
+    print("Plotting % for dataset % ", title, dataset)
     plotIndCurves(no_features, fit_time, title, xlabel, ylabel, savefile)
 
 def plotVarCurves(x1, y1, y2, title, xlabel, ylabel, label1, label2, savefile):
@@ -70,7 +70,6 @@ def plotVarCurves(x1, y1, y2, title, xlabel, ylabel, label1, label2, savefile):
     plt.plot(x1, y1, 'o-', label=label1)
     plt.plot(x1, y2, 'o-', label=label2)
     plt.legend(loc='best')
-    plt.grid()
     plt.savefig(savefile)
 
 def plotIndCurves(x, y, title, xlabel, ylabel, savefile):
@@ -79,7 +78,6 @@ def plotIndCurves(x, y, title, xlabel, ylabel, savefile):
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.plot(x, y, 'o-')
-    plt.grid()
     plt.savefig(savefile)
 
 if __name__ == '__main__':
@@ -103,8 +101,3 @@ if __name__ == '__main__':
     pcaFunc(no_features, X_1_scaled, y_1, dataset_1, random_seed)
     no_features = np.arange(1, 51)
     pcaFunc(no_features, X_2_scaled, y_2, dataset_2, random_seed)
-
-'''
-car - no of components = 9
-adult - no of components = 30
-'''

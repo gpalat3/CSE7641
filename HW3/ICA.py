@@ -4,8 +4,9 @@ import time
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler, MinMaxScaler, OneHotEncoder
 from sklearn.model_selection import train_test_split
-from sklearn.decomposition import PCA
+from sklearn.decomposition import FastICA
 from sklearn import metrics
+from scipy.stats import kurtosis
 pd.options.mode.chained_assignment = None
 
 def loadAdultData(filename, col_names):
@@ -38,40 +39,26 @@ def loadCarData(filename, col_names):
     y.replace('vgood', 4, inplace=True)
     return X.values, y.values
 
-def pcaFunc(no_features, X, y, dataset, random_seed):
+def icaFunc(no_features, X, y, dataset, random_seed):
     fit_time = []
-    # cum_variance = []
+    kurtosis_ica = []
     for i in no_features:
         print('Feature No.: ', i)
-        pca = PCA(n_components=i, random_state=random_seed)
+        ica = FastICA(n_components=i, random_state=random_seed)
         fit_start_tm = time.time()
-        pca.fit(X)
+        ica.fit(X)
         fit_end_tm = time.time()
         fit_tm = fit_end_tm - fit_start_tm
         fit_time.append(fit_tm)
-    variance = pca.explained_variance_ratio_
-    cum_variance = np.cumsum(pca.explained_variance_ratio_)
-    title, xlabel, ylabel, label1, label2 = ['PCA - ' + dataset, 'Number Of Components',
-                                                             'Variance', 'Explained Variance',
-                                                             'Cumulative Variance']
-    savefile = 'plots/PCA_Variance_' + dataset + '.png'
+        kurtosis_ica.append(np.average(kurtosis(ica.components_)))
+    title, xlabel, ylabel = ['ICA - ' + dataset, 'Number Of Components', 'Kurtosis']
+    savefile = 'plots/ICA_Kurtosis_' + dataset + '.png'
     print("Plotting %s for dataset %s " % (title, dataset))
-    plotVarCurves(no_features, variance, cum_variance, title, xlabel, ylabel, label1, label2, savefile)
-    title, xlabel, ylabel = ['PCA Fit Times - ' + dataset, 'Number Of Components', 'Fit Time']
-    savefile = 'plots/PCA_fit_times_' + dataset + '.png'
+    plotIndCurves(no_features, kurtosis_ica, title, xlabel, ylabel, savefile)
+    title, xlabel, ylabel = ['ICA Fit Times - ' + dataset, 'Number Of Components', 'Fit Time']
+    savefile = 'plots/ICA_fit_times_' + dataset + '.png'
     print("Plotting %s for dataset %s " % (title, dataset))
     plotIndCurves(no_features, fit_time, title, xlabel, ylabel, savefile)
-
-def plotVarCurves(x1, y1, y2, title, xlabel, ylabel, label1, label2, savefile):
-    plt.figure()
-    plt.title(title)
-    plt.xlabel(xlabel)
-    plt.ylabel(ylabel)
-    plt.plot(x1, y1, 'o-', label=label1)
-    plt.plot(x1, y2, 'o-', label=label2)
-    plt.legend(loc='best')
-    plt.grid()
-    plt.savefig(savefile)
 
 def plotIndCurves(x, y, title, xlabel, ylabel, savefile):
     plt.figure()
@@ -100,11 +87,11 @@ if __name__ == '__main__':
     X_1_scaled = scale.fit_transform(X_1)
     X_2_scaled = scale.fit_transform(X_2)
     no_features = np.arange(1, 15)
-    pcaFunc(no_features, X_1_scaled, y_1, dataset_1, random_seed)
+    icaFunc(no_features, X_1_scaled, y_1, dataset_1, random_seed)
     no_features = np.arange(1, 51)
-    pcaFunc(no_features, X_2_scaled, y_2, dataset_2, random_seed)
+    icaFunc(no_features, X_2_scaled, y_2, dataset_2, random_seed)
 
 '''
-car - no of components = 9
-adult - no of components = 30
+car - no of components = 7
+adult - no of components = 11, 21
 '''

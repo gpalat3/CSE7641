@@ -5,7 +5,9 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 from sklearn.preprocessing import StandardScaler, MinMaxScaler, OneHotEncoder
 from sklearn.model_selection import train_test_split
+from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
+from sklearn.mixture import GaussianMixture
 from sklearn import metrics
 pd.options.mode.chained_assignment = None
 
@@ -63,23 +65,71 @@ def kMeans(k, X, y, dataset, random_seed):
         hgy_score.append(metrics.homogeneity_score(y, y_pred))
         comp_score.append(metrics.completeness_score(y, y_pred))
         v_score.append(metrics.v_measure_score(y, y_pred))
-    title, xlabel, ylabel = ['KMeans Distance - ' + dataset, 'Number Of Clusters', 'Distance']
-    savefile = 'plots/KMeans_clusters_Distance_' + dataset + '.png'
+    title, xlabel, ylabel = ['PCA KMeans Distance - ' + dataset, 'Number Of Clusters', 'Distance']
+    savefile = 'plots/PCA_KMeans_clusters_Distance_' + dataset + '.png'
     print("Plotting %s for dataset %s " % (title, dataset))
     plotIndCurves(k, distance, title, xlabel, ylabel, savefile)
-    title, xlabel, ylabel = ['KMeans Silhouette Score - ' + dataset, 'Number Of Clusters', 'Silhouette']
-    savefile = 'plots/KMeans_clusters_silhouette_' + dataset + '.png'
+    title, xlabel, ylabel = ['PCA KMeans Silhouette Score - ' + dataset, 'Number Of Clusters', 'Silhouette']
+    savefile = 'plots/PCA_KMeans_clusters_silhouette_' + dataset + '.png'
     print("Plotting %s for dataset %s " % (title, dataset))
     plotIndCurves(k, sil_score, title, xlabel, ylabel, savefile)
-    title, xlabel, ylabel, label1, label2, label3, label4 = ['KMeans Scores - ' + dataset, 'Number Of Clusters',
+    title, xlabel, ylabel, label1, label2, label3, label4 = ['PCA KMeans Scores - ' + dataset, 'Number Of Clusters',
                                                                      'Scores', 'Adjusted Mutual Info',
                                                                      'Homogeneity', 'Completeness', 'V Measure']
-    savefile = 'plots/KMeans_clusters_scores_' + dataset + '.png'
+    savefile = 'plots/PCA_KMeans_clusters_scores_' + dataset + '.png'
     print("Plotting %s for dataset %s " % (title, dataset))
     plotCurves(k, ami_score, hgy_score, comp_score, v_score, title, xlabel, ylabel, label1, label2, label3,
                label4, savefile)
-    title, xlabel, ylabel = ['KMeans Fit Times - ' + dataset, 'Number Of Clusters', 'Fit Time']
-    savefile = 'plots/KMeans_Fit_Times_' + dataset + '.png'
+    title, xlabel, ylabel = ['PCA KMeans Fit Times - ' + dataset, 'Number Of Clusters', 'Fit Time']
+    savefile = 'plots/PCA_KMeans_Fit_Times_' + dataset + '.png'
+    print("Plotting %s for dataset %s " % (title, dataset))
+    plotIndCurves(k, fit_time, title, xlabel, ylabel, savefile)
+
+def gmm(k, X, y, dataset, random_seed):
+    fit_time = []
+    pred = []
+    aic = []
+    bic = []
+    sil_score = []
+    ami_score = []
+    hgy_score = []
+    comp_score = []
+    v_score = []
+    print("Looping through clusters: ", k)
+    for i in k:
+        print('#k: ', i)
+        clf = GaussianMixture(n_components=i, random_state=random_seed)
+        fit_start_tm = time.time()
+        clf.fit(X)
+        fit_end_tm = time.time()
+        fit_tm = fit_end_tm - fit_start_tm
+        fit_time.append(fit_tm)
+        y_pred = clf.predict(X)
+        pred.append(y_pred)
+        aic.append(clf.aic(X))
+        bic.append(clf.bic(X))
+        sil_score.append(metrics.silhouette_score(X, y_pred, metric='euclidean'))
+        ami_score.append(metrics.adjusted_mutual_info_score(y, y_pred))
+        hgy_score.append(metrics.homogeneity_score(y, y_pred))
+        comp_score.append(metrics.completeness_score(y, y_pred))
+        v_score.append(metrics.v_measure_score(y, y_pred))
+    title, xlabel, ylabel, lable1, label2 = ['EM - Gaussian Mixture ' + dataset, 'Number Of Components', 'AIC BIC', 'AIC', 'BIC']
+    savefile = 'plots/EM_Components_AIC_BIC_' + dataset + '.png'
+    print("Plotting %s for dataset %s " % (title, dataset))
+    plotEmCurves(k, aic, bic, title, xlabel, ylabel, lable1, label2, savefile)
+    title, xlabel, ylabel = ['EM - Gaussian Mixture Silhouette Score ' + dataset, 'Number Of Clusters', 'Silhouette']
+    savefile = 'plots/EM_Components_Silhouette_' + dataset + '.png'
+    print("Plotting %s for dataset %s " % (title, dataset))
+    plotIndCurves(k, sil_score, title, xlabel, ylabel, savefile)
+    title, xlabel, ylabel, label1, label2, label3, label4 = ['EM - Gaussian Mixture Scores ' + dataset, 'Number Of Components',
+                                                                     'Scores', 'Adjusted Mutual Info',
+                                                                     'Homogeneity', 'Completeness', 'V Measure']
+    savefile = 'plots/EM_Components_Scores_' + dataset + '.png'
+    print("Plotting %s for dataset %s " % (title, dataset))
+    plotCurves(k, ami_score, hgy_score, comp_score, v_score, title, xlabel, ylabel, label1, label2, label3,
+               label4, savefile)
+    title, xlabel, ylabel = ['EM - Gaussian Mixture Fit Times - ' + dataset, 'Number Of Components', 'Fit Time']
+    savefile = 'plots/EM_Fit_Times_' + dataset + '.png'
     print("Plotting %s for dataset %s " % (title, dataset))
     plotIndCurves(k, fit_time, title, xlabel, ylabel, savefile)
 
@@ -110,9 +160,9 @@ def plotSilhouette(k, X, dataset, random_seed):
     ax1.set_yticks([])
     ax1.set_xticks([-0.2, 0, 0.2, 0.4, 0.6, 0.8, 1])
     if dataset == 'car':
-        savefile = 'plots/sil_car/KMeans_Silhouette_Plot_' + str(k) + '_' + dataset + '.png'
+        savefile = 'plots/sil_car/PCA_KMeans_Silhouette_Plot_' + str(k) + '_' + dataset + '.png'
     else:
-        savefile = 'plots/sil_adult/KMeans_Silhouette_Plot_' + str(k) + '_' + dataset + '.png'
+        savefile = 'plots/sil_adult/PCA_KMeans_Silhouette_Plot_' + str(k) + '_' + dataset + '.png'
     plt.savefig(savefile)
 
 def plotCurves(x1, y1, y2, y3, y4, title, xlabel, ylabel, label1, label2, label3, label4, savefile):
@@ -124,6 +174,17 @@ def plotCurves(x1, y1, y2, y3, y4, title, xlabel, ylabel, label1, label2, label3
     plt.plot(x1, y2, 'o-', label=label2)
     plt.plot(x1, y3, 'o-', label=label3)
     plt.plot(x1, y4, 'o-', label=label4)
+    plt.legend(loc='best')
+    plt.grid()
+    plt.savefig(savefile)
+
+def plotEmCurves(x, y1, y2, title, xlabel, ylabel, label1, label2, savefile):
+    plt.figure()
+    plt.title(title)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.plot(x, y1, 'o-', label=label1)
+    plt.plot(x, y2, 'o-', label=label2)
     plt.legend(loc='best')
     plt.grid()
     plt.savefig(savefile)
@@ -162,30 +223,36 @@ if __name__ == '__main__':
     scale = MinMaxScaler()
     X_1_scaled = scale.fit_transform(X_1)
     X_2_scaled = scale.fit_transform(X_2)
-    k = np.arange(2, 51)
-    kMeans(k, X_1_scaled, y_1, dataset_1, random_seed)
-    plotSilhouette(2, X_1_scaled, dataset_1, random_seed)
-    plotSilhouette(3, X_1_scaled, dataset_1, random_seed)
-    plotSilhouette(4, X_1_scaled, dataset_1, random_seed)
-    plotSilhouette(8, X_1_scaled, dataset_1, random_seed)
-    plotSilhouette(9, X_1_scaled, dataset_1, random_seed)
-    plotSilhouette(10, X_1_scaled, dataset_1, random_seed)
-    plotSilhouette(11, X_1_scaled, dataset_1, random_seed)
-    plotSilhouette(12, X_1_scaled, dataset_1, random_seed)
-    plotSilhouette(13, X_1_scaled, dataset_1, random_seed)
-    plotSilhouette(14, X_1_scaled, dataset_1, random_seed)
-    plotSilhouette(15, X_1_scaled, dataset_1, random_seed)
-    kMeans(k, X_2_scaled, y_2, dataset_2, random_seed)
-    plotSilhouette(2, X_2_scaled, dataset_2, random_seed)
-    plotSilhouette(3, X_2_scaled, dataset_2, random_seed)
-    plotSilhouette(4, X_2_scaled, dataset_2, random_seed)
-    plotSilhouette(5, X_2_scaled, dataset_2, random_seed)
-    plotSilhouette(10, X_2_scaled, dataset_2, random_seed)
-    plotSilhouette(19, X_2_scaled, dataset_2, random_seed)
-    plotSilhouette(23, X_2_scaled, dataset_2, random_seed)
+    pca_1 = PCA(n_components=9, random_state=random_seed)
+    X_1_dr = pca_1.fit_transform(X_1_scaled)
+    pca_2 = PCA(n_components=30, random_state=random_seed)
+    X_2_dr = pca_2.fit_transform(X_2_scaled)
+    k = np.arange(2, 26)
+    kMeans(k, X_1_dr, y_1, dataset_1, random_seed)
+    kMeans(k, X_2_dr, y_2, dataset_2, random_seed)
+
+    plotSilhouette(2, X_1_dr, dataset_1, random_seed)
+    plotSilhouette(3, X_1_dr, dataset_1, random_seed)
+    plotSilhouette(4, X_1_dr, dataset_1, random_seed)
+    plotSilhouette(8, X_1_dr, dataset_1, random_seed)
+    plotSilhouette(9, X_1_dr, dataset_1, random_seed)
+    plotSilhouette(10, X_1_dr, dataset_1, random_seed)
+    plotSilhouette(11, X_1_dr, dataset_1, random_seed)
+    plotSilhouette(12, X_1_dr, dataset_1, random_seed)
+    plotSilhouette(13, X_1_dr, dataset_1, random_seed)
+    plotSilhouette(14, X_1_dr, dataset_1, random_seed)
+    plotSilhouette(15, X_1_dr, dataset_1, random_seed)
+
+    plotSilhouette(2, X_2_dr, dataset_2, random_seed)
+    plotSilhouette(3, X_2_dr, dataset_2, random_seed)
+    plotSilhouette(4, X_2_dr, dataset_2, random_seed)
+    plotSilhouette(5, X_2_dr, dataset_2, random_seed)
+    plotSilhouette(10, X_2_dr, dataset_2, random_seed)
+    plotSilhouette(19, X_2_dr, dataset_2, random_seed)
+    plotSilhouette(23, X_2_dr, dataset_2, random_seed)
     '''
-    car - cluster = 4
-    adult - cluster = 2
+        car - cluster = 3
+        adult - cluster = 5
     '''
     clf_1 = KMeans(n_clusters=4, init='k-means++', random_state=random_seed)
     clf_2 = KMeans(n_clusters=2, init='k-means++', random_state=random_seed)
@@ -197,20 +264,9 @@ if __name__ == '__main__':
     cluster_labels_2 = clf_2.fit_predict(X_2_scaled)
     cluster_labels_2 = pd.DataFrame(data=cluster_labels_2, columns=['Labels'])
     cluster_labels_2_counts = cluster_labels_2['Labels'].value_counts()
-    title, xlabel, ylabel = ['KMeans - ' + dataset_1, 'Label', 'Count']
-    savefile = 'plots/KMeans_Label_' + dataset_1 + '.png'
+    title, xlabel, ylabel = ['PCA KMeans - ' + dataset_1, 'Label', 'Count']
+    savefile = 'plots/PCA_KMeans_Label_' + dataset_1 + '.png'
     plotBar(cluster_labels_1_counts, title, xlabel, ylabel, savefile)
-    title, xlabel, ylabel = ['KMeans - ' + dataset_2, 'Label', 'Count']
-    savefile = 'plots/KMeans_Label_' + dataset_2 + '.png'
+    title, xlabel, ylabel = ['PCA KMeans - ' + dataset_2, 'Label', 'Count']
+    savefile = 'plots/PCA_KMeans_Label_' + dataset_2 + '.png'
     plotBar(cluster_labels_2_counts, title, xlabel, ylabel, savefile)
-    y_1_counts = pd.DataFrame(data=y_1, columns=['Labels'])
-    y_1_counts = y_1_counts['Labels'].value_counts()
-    y_2_counts = pd.DataFrame(data=y_2, columns=['Labels'])
-    y_2_counts = y_2_counts['Labels'].value_counts()
-    title, xlabel, ylabel = ['Car Dataset - ' + dataset_1, 'Label', 'Count']
-    savefile = 'plots/Car_Label_' + dataset_1 + '.png'
-    plotBar(y_1_counts, title, xlabel, ylabel, savefile)
-    title, xlabel, ylabel = ['Adult Dataset - ' + dataset_2, 'Label', 'Count']
-    savefile = 'plots/Adult_Label_' + dataset_2 + '.png'
-    plotBar(y_2_counts, title, xlabel, ylabel, savefile)
-
