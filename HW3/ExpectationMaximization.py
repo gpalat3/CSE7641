@@ -208,9 +208,9 @@ if __name__ == '__main__':
     cluster_labels_2 = clf_2.fit_predict(X_2_scaled)
     cluster_labels_2 = pd.DataFrame(data=cluster_labels_2, columns=['Labels'])
     cluster_labels_2_counts = cluster_labels_2['Labels'].value_counts()
-    title, xlabel, ylabel = ['KMeans - ' + dataset_1, 'Label', 'Count']
+    title, xlabel, ylabel = ['EM - ' + dataset_1, 'Label', 'Count']
     savefile = 'plots/EM_Label_' + dataset_1 + '.png'
     plotBar(cluster_labels_1_counts, title, xlabel, ylabel, savefile)
-    title, xlabel, ylabel = ['KMeans - ' + dataset_2, 'Label', 'Count']
+    title, xlabel, ylabel = ['EM - ' + dataset_2, 'Label', 'Count']
     savefile = 'plots/EM_Label_' + dataset_2 + '.png'
     plotBar(cluster_labels_2_counts, title, xlabel, ylabel, savefile)

@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import time
 import matplotlib.pyplot as plt
+import seaborn as sns
 from sklearn.preprocessing import StandardScaler, MinMaxScaler, OneHotEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.decomposition import PCA
@@ -82,6 +83,14 @@ def plotIndCurves(x, y, title, xlabel, ylabel, savefile):
     plt.grid()
     plt.savefig(savefile)
 
+def plotScatter(X_pca, y, title, xlabel, ylabel, savefile):
+    fig, ax = plt.subplots(figsize=(10, 10))
+    ax.set_title(title)
+    ax.set_ylabel(ylabel)
+    ax.set_xlabel(xlabel)
+    sns.scatterplot(X_pca[:,0], X_pca[:,1], hue=y, palette='Set1', ax=ax)
+    plt.savefig(savefile)
+
 if __name__ == '__main__':
     dataset_1 = 'car'
     dataset_2 = 'adult'
@@ -103,8 +112,17 @@ if __name__ == '__main__':
     pcaFunc(no_features, X_1_scaled, y_1, dataset_1, random_seed)
     no_features = np.arange(1, 51)
     pcaFunc(no_features, X_2_scaled, y_2, dataset_2, random_seed)
-
-'''
-car - no of components = 9
-adult - no of components = 30
-'''
+    '''
+    car - no of components = 9
+    adult - no of components = 30
+    '''
+    pca_1 = PCA(n_components=9, random_state=random_seed)
+    X_1_pca = pca_1.fit_transform(X_1_scaled)
+    title, xlabel, ylabel = ['PCA Scatter Plot ' + dataset_1, 'PCA1', 'PCA2']
+    savefile = 'plots/PCA_Scatter_Plot_' + dataset_1 + '.png'
+    plotScatter(X_1_pca, y_1, title, xlabel, ylabel, savefile)
+    pca_2 = PCA(n_components=30, random_state=random_seed)
+    X_2_pca = pca_2.fit_transform(X_2_scaled)
+    title, xlabel, ylabel = ['PCA Scatter Plot ' + dataset_2, 'PCA1', 'PCA2']
+    savefile = 'plots/PCA_Scatter_Plot_' + dataset_2 + '.png'
+    plotScatter(X_2_pca, y_2, title, xlabel, ylabel, savefile)
