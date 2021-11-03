@@ -67,6 +67,7 @@ def plotIndCurves(x, y, title, xlabel, ylabel, savefile):
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.plot(x, y, 'o-')
+    plt.grid()
     plt.savefig(savefile)
 
 def plotScatter(X_pca, y, title, xlabel, ylabel, savefile):
@@ -100,7 +101,7 @@ if __name__ == '__main__':
     grpFunc(no_features, X_2_scaled, y_2, dataset_2, random_seed)
     '''
     car - no of components = 9
-    adult - no of components = 10
+    adult - no of components = 10, 23
     '''
     grp_1 = GaussianRandomProjection(n_components=9, random_state=random_seed)
     X_1_grp = grp_1.fit_transform(X_1_scaled)

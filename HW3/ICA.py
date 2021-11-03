@@ -101,7 +101,7 @@ if __name__ == '__main__':
     icaFunc(no_features, X_2_scaled, y_2, dataset_2, random_seed)
     '''
     car - no of components = 7
-    adult - no of components = 8, 11, 21
+    adult - no of components = 8, 11, 21, 37
     '''
     ica_1 = FastICA(n_components=7, random_state=random_seed)
     X_1_ica = ica_1.fit_transform(X_1_scaled)

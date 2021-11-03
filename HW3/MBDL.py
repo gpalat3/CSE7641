@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.preprocessing import StandardScaler, MinMaxScaler, OneHotEncoder
 from sklearn.model_selection import train_test_split
-from sklearn.decomposition import PCA
+from sklearn.decomposition import MiniBatchDictionaryLearning
 from sklearn import metrics
 pd.options.mode.chained_assignment = None
 
@@ -39,40 +39,27 @@ def loadCarData(filename, col_names):
     y.replace('vgood', 4, inplace=True)
     return X.values, y.values
 
-def pcaFunc(no_features, X, y, dataset, random_seed):
+def grpFunc(no_features, X, y, dataset, random_seed):
     fit_time = []
-    # cum_variance = []
+    rmse = []
     for i in no_features:
         print('Feature No.: ', i)
-        pca = PCA(n_components=i, random_state=random_seed)
+        mbdl = MiniBatchDictionaryLearning(n_components=i, random_state=random_seed, batch_size=200, n_iter=100, alpha=1)
         fit_start_tm = time.time()
-        pca.fit(X)
+        mbdl.fit(X)
         fit_end_tm = time.time()
         fit_tm = fit_end_tm - fit_start_tm
         fit_time.append(fit_tm)
-    variance = pca.explained_variance_ratio_
-    cum_variance = np.cumsum(pca.explained_variance_ratio_)
-    title, xlabel, ylabel, label1, label2 = ['PCA - ' + dataset, 'Number Of Components',
-                                                             'Variance', 'Explained Variance',
-                                                             'Cumulative Variance']
-    savefile = 'plots/PCA_Variance_' + dataset + '.png'
-    print("Plotting %s for dataset %s " % (title, dataset))
-    plotVarCurves(no_features, variance, cum_variance, title, xlabel, ylabel, label1, label2, savefile)
-    title, xlabel, ylabel = ['PCA Fit Times - ' + dataset, 'Number Of Components', 'Fit Time']
-    savefile = 'plots/PCA_fit_times_' + dataset + '.png'
-    print("Plotting %s for dataset %s " % (title, dataset))
+        X_r = np.dot(mbdl.transform(X), np.linalg.pinv(np.transpose(mbdl.components_)))
+        rmse.append(np.sqrt(metrics.mean_squared_error(X, X_r)))
+    title, xlabel, ylabel = ['MBDL - ' + dataset, 'Number Of Components', 'RMSE']
+    savefile = 'plots/MBDL_Reconstruction_' + dataset + '.png'
+    print("Plotting % for dataset % ", title, dataset)
+    plotIndCurves(no_features, rmse, title, xlabel, ylabel, savefile)
+    title, xlabel, ylabel = ['MBDL Fit Times - ' + dataset, 'Number Of Components', 'Fit Time']
+    savefile = 'plots/MBDL_fit_times_' + dataset + '.png'
+    print("Plotting % for dataset % ", title, dataset)
     plotIndCurves(no_features, fit_time, title, xlabel, ylabel, savefile)
-
-def plotVarCurves(x1, y1, y2, title, xlabel, ylabel, label1, label2, savefile):
-    plt.figure()
-    plt.title(title)
-    plt.xlabel(xlabel)
-    plt.ylabel(ylabel)
-    plt.plot(x1, y1, 'o-', label=label1)
-    plt.plot(x1, y2, 'o-', label=label2)
-    plt.legend(loc='best')
-    plt.grid()
-    plt.savefig(savefile)
 
 def plotIndCurves(x, y, title, xlabel, ylabel, savefile):
     plt.figure()
@@ -83,12 +70,12 @@ def plotIndCurves(x, y, title, xlabel, ylabel, savefile):
     plt.grid()
     plt.savefig(savefile)
 
-def plotScatter(X, y, title, xlabel, ylabel, savefile):
+def plotScatter(X_pca, y, title, xlabel, ylabel, savefile):
     fig, ax = plt.subplots(figsize=(10, 10))
     ax.set_title(title)
     ax.set_ylabel(ylabel)
     ax.set_xlabel(xlabel)
-    sns.scatterplot(X[:,0], X[:,1], hue=y, palette='Set1', ax=ax)
+    sns.scatterplot(X_pca[:,0], X_pca[:,1], hue=y, palette='Set1', ax=ax)
     plt.savefig(savefile)
 
 if __name__ == '__main__':
@@ -108,21 +95,21 @@ if __name__ == '__main__':
     scale = MinMaxScaler()
     X_1_scaled = scale.fit_transform(X_1)
     X_2_scaled = scale.fit_transform(X_2)
-    no_features = np.arange(1, 15)
-    pcaFunc(no_features, X_1_scaled, y_1, dataset_1, random_seed)
+    no_features = np.arange(1, 26)
+    grpFunc(no_features, X_1_scaled, y_1, dataset_1, random_seed)
     no_features = np.arange(1, 51)
-    pcaFunc(no_features, X_2_scaled, y_2, dataset_2, random_seed)
+    grpFunc(no_features, X_2_scaled, y_2, dataset_2, random_seed)
     '''
-    car - no of components = 9
-    adult - no of components = 30
+    car - no of components = 21
+    adult - no of components = 4
     '''
-    pca_1 = PCA(n_components=9, random_state=random_seed)
-    X_1_pca = pca_1.fit_transform(X_1_scaled)
-    title, xlabel, ylabel = ['PCA Scatter Plot ' + dataset_1, 'PCA1', 'PCA2']
-    savefile = 'plots/PCA_Scatter_Plot_' + dataset_1 + '.png'
-    plotScatter(X_1_pca, y_1, title, xlabel, ylabel, savefile)
-    pca_2 = PCA(n_components=30, random_state=random_seed)
-    X_2_pca = pca_2.fit_transform(X_2_scaled)
-    title, xlabel, ylabel = ['PCA Scatter Plot ' + dataset_2, 'PCA1', 'PCA2']
-    savefile = 'plots/PCA_Scatter_Plot_' + dataset_2 + '.png'
-    plotScatter(X_2_pca, y_2, title, xlabel, ylabel, savefile)
+    mbdl_1 = MiniBatchDictionaryLearning(n_components=21, random_state=random_seed, batch_size=200, n_iter=100, alpha=1)
+    X_1_mbdl = mbdl_1.fit_transform(X_1_scaled)
+    title, xlabel, ylabel = ['MBDL Scatter Plot ' + dataset_1, 'GRP1', 'GRP2']
+    savefile = 'plots/MBDL_Scatter_Plot_' + dataset_1 + '.png'
+    plotScatter(X_1_mbdl, y_1, title, xlabel, ylabel, savefile)
+    mbdl_2 = MiniBatchDictionaryLearning(n_components=4, random_state=random_seed, batch_size=200, n_iter=100, alpha=1)
+    X_2_mbdl = mbdl_2.fit_transform(X_2_scaled)
+    title, xlabel, ylabel = ['MBDL Scatter Plot ' + dataset_2, 'GRP1', 'GRP2']
+    savefile = 'plots/MBDL_Scatter_Plot_' + dataset_2 + '.png'
+    plotScatter(X_2_mbdl, y_2, title, xlabel, ylabel, savefile)
