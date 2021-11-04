@@ -97,18 +97,18 @@ if __name__ == '__main__':
     X_2_scaled = scale.fit_transform(X_2)
     no_features = np.arange(1, 15)
     icaFunc(no_features, X_1_scaled, y_1, dataset_1, random_seed)
-    no_features = np.arange(1, 51)
+    no_features = np.arange(1, 23)
     icaFunc(no_features, X_2_scaled, y_2, dataset_2, random_seed)
     '''
     car - no of components = 7
-    adult - no of components = 8, 11, 21, 37
+    adult - no of components = 8, 10, 11, 21, 37, 80
     '''
     ica_1 = FastICA(n_components=7, random_state=random_seed)
     X_1_ica = ica_1.fit_transform(X_1_scaled)
     title, xlabel, ylabel = ['ICA Scatter Plot ' + dataset_1, 'ICA1', 'ICA2']
     savefile = 'plots/ICA_Scatter_Plot_' + dataset_1 + '.png'
     plotScatter(X_1_ica, y_1, title, xlabel, ylabel, savefile)
-    ica_2 = FastICA(n_components=11, random_state=random_seed)
+    ica_2 = FastICA(n_components=21, random_state=random_seed)
     X_2_ica = ica_2.fit_transform(X_2_scaled)
     title, xlabel, ylabel = ['ICA Scatter Plot ' + dataset_2, 'ICA1', 'ICA2']
     savefile = 'plots/ICA_Scatter_Plot_' + dataset_2 + '.png'

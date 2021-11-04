@@ -225,7 +225,7 @@ if __name__ == '__main__':
     X_2_scaled = scale.fit_transform(X_2)
     ica_1 = FastICA(n_components=7, random_state=random_seed)
     X_1_dr = ica_1.fit_transform(X_1_scaled)
-    ica_2 = FastICA(n_components=11, random_state=random_seed)
+    ica_2 = FastICA(n_components=10, random_state=random_seed)
     X_2_dr = ica_2.fit_transform(X_2_scaled)
     k = np.arange(2, 26)
     kMeans(k, X_1_dr, y_1, dataset_1, random_seed)
