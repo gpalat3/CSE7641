@@ -176,11 +176,12 @@ if __name__ == '__main__':
     scale = MinMaxScaler()
     X_1_scaled = scale.fit_transform(X_1)
     X_2_scaled = scale.fit_transform(X_2)
-    k = np.arange(2, 51)
+    k = np.arange(2, 26)
     gmm(k, X_1_scaled, y_1, dataset_1, random_seed)
     plotSilhouette(2, X_1_scaled, dataset_1, random_seed)
     plotSilhouette(3, X_1_scaled, dataset_1, random_seed)
     plotSilhouette(4, X_1_scaled, dataset_1, random_seed)
+    plotSilhouette(5, X_1_scaled, dataset_1, random_seed)
     plotSilhouette(9, X_1_scaled, dataset_1, random_seed)
     plotSilhouette(10, X_1_scaled, dataset_1, random_seed)
     plotSilhouette(11, X_1_scaled, dataset_1, random_seed)
@@ -188,6 +189,7 @@ if __name__ == '__main__':
     plotSilhouette(2, X_2_scaled, dataset_2, random_seed)
     plotSilhouette(3, X_2_scaled, dataset_2, random_seed)
     plotSilhouette(4, X_2_scaled, dataset_2, random_seed)
+    plotSilhouette(5, X_2_scaled, dataset_2, random_seed)
     plotSilhouette(7, X_2_scaled, dataset_2, random_seed)
     plotSilhouette(8, X_2_scaled, dataset_2, random_seed)
     plotSilhouette(9, X_2_scaled, dataset_2, random_seed)
@@ -195,11 +197,13 @@ if __name__ == '__main__':
     plotSilhouette(13, X_2_scaled, dataset_2, random_seed)
     plotSilhouette(14, X_2_scaled, dataset_2, random_seed)
     '''
-    car - cluster = 4
-    adult - cluster = 2, 3, 4
+    car - cluster = 3
+    3, 5, 10
+    adult - cluster = 3
+    3, 5
     '''
-    clf_1 = GaussianMixture(n_components=4, random_state=random_seed)
-    clf_2 = GaussianMixture(n_components=4, random_state=random_seed)
+    clf_1 = GaussianMixture(n_components=3, random_state=random_seed)
+    clf_2 = GaussianMixture(n_components=3, random_state=random_seed)
     clf_1.fit(X_1_scaled)
     clf_2.fit(X_2_scaled)
     cluster_labels_1 = clf_1.fit_predict(X_1_scaled)

@@ -43,7 +43,7 @@ def loadCarData(filename, col_names):
 
 def kMeans(k, X, y, dataset, random_seed):
     fit_time = []
-    distance = []
+    distortion = []
     sil_score = []
     ami_score = []
     hgy_score = []
@@ -59,16 +59,16 @@ def kMeans(k, X, y, dataset, random_seed):
         fit_tm = fit_end_tm - fit_start_tm
         fit_time.append(fit_tm)
         y_pred = clf.fit_predict(X)
-        distance.append(clf.inertia_)
+        distortion.append(clf.inertia_)
         sil_score.append(metrics.silhouette_score(X, y_pred, metric='euclidean'))
         ami_score.append(metrics.adjusted_mutual_info_score(y, y_pred))
         hgy_score.append(metrics.homogeneity_score(y, y_pred))
         comp_score.append(metrics.completeness_score(y, y_pred))
         v_score.append(metrics.v_measure_score(y, y_pred))
-    title, xlabel, ylabel = ['GRP KMeans Distance - ' + dataset, 'Number Of Clusters', 'Distance']
-    savefile = 'plots/GRP_KMeans_clusters_Distance_' + dataset + '.png'
+    title, xlabel, ylabel = ['GRP KMeans Distortion - ' + dataset, 'Number Of Clusters', 'Distance']
+    savefile = 'plots/GRP_KMeans_Clusters_Distortion_' + dataset + '.png'
     print("Plotting %s for dataset %s " % (title, dataset))
-    plotIndCurves(k, distance, title, xlabel, ylabel, savefile)
+    plotIndCurves(k, distortion, title, xlabel, ylabel, savefile)
     title, xlabel, ylabel = ['GRP KMeans Silhouette Score - ' + dataset, 'Number Of Clusters', 'Silhouette']
     savefile = 'plots/GRP_KMeans_clusters_silhouette_' + dataset + '.png'
     print("Plotting %s for dataset %s " % (title, dataset))

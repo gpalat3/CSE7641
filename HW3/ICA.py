@@ -108,7 +108,7 @@ if __name__ == '__main__':
     title, xlabel, ylabel = ['ICA Scatter Plot ' + dataset_1, 'ICA1', 'ICA2']
     savefile = 'plots/ICA_Scatter_Plot_' + dataset_1 + '.png'
     plotScatter(X_1_ica, y_1, title, xlabel, ylabel, savefile)
-    ica_2 = FastICA(n_components=21, random_state=random_seed)
+    ica_2 = FastICA(n_components=10, random_state=random_seed)
     X_2_ica = ica_2.fit_transform(X_2_scaled)
     title, xlabel, ylabel = ['ICA Scatter Plot ' + dataset_2, 'ICA1', 'ICA2']
     savefile = 'plots/ICA_Scatter_Plot_' + dataset_2 + '.png'

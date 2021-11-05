@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import time
 import matplotlib.pyplot as plt
+import seaborn as sns
 import matplotlib.cm as cm
 from sklearn.preprocessing import StandardScaler, MinMaxScaler, OneHotEncoder
 from sklearn.model_selection import train_test_split
@@ -41,7 +42,7 @@ def loadCarData(filename, col_names):
 
 def kMeans(k, X, y, dataset, random_seed):
     fit_time = []
-    distance = []
+    distortion = []
     sil_score = []
     ami_score = []
     hgy_score = []
@@ -57,16 +58,16 @@ def kMeans(k, X, y, dataset, random_seed):
         fit_tm = fit_end_tm - fit_start_tm
         fit_time.append(fit_tm)
         y_pred = clf.fit_predict(X)
-        distance.append(clf.inertia_)
+        distortion.append(clf.inertia_)
         sil_score.append(metrics.silhouette_score(X, y_pred, metric='euclidean'))
         ami_score.append(metrics.adjusted_mutual_info_score(y, y_pred))
         hgy_score.append(metrics.homogeneity_score(y, y_pred))
         comp_score.append(metrics.completeness_score(y, y_pred))
         v_score.append(metrics.v_measure_score(y, y_pred))
-    title, xlabel, ylabel = ['KMeans Distance - ' + dataset, 'Number Of Clusters', 'Distance']
-    savefile = 'plots/KMeans_clusters_Distance_' + dataset + '.png'
+    title, xlabel, ylabel = ['KMeans Distortion - ' + dataset, 'Number Of Clusters', 'Distance']
+    savefile = 'plots/KMeans_Clusters_Distortion_' + dataset + '.png'
     print("Plotting %s for dataset %s " % (title, dataset))
-    plotIndCurves(k, distance, title, xlabel, ylabel, savefile)
+    plotIndCurves(k, distortion, title, xlabel, ylabel, savefile)
     title, xlabel, ylabel = ['KMeans Silhouette Score - ' + dataset, 'Number Of Clusters', 'Silhouette']
     savefile = 'plots/KMeans_clusters_silhouette_' + dataset + '.png'
     print("Plotting %s for dataset %s " % (title, dataset))
@@ -137,12 +138,34 @@ def plotIndCurves(x, y, title, xlabel, ylabel, savefile):
     plt.grid()
     plt.savefig(savefile)
 
-def plotBar(labels, title, xlabel, ylabel, savefile):
+def plotScatter(X, y, cluster_size, cluster_centers, title, xlabel, ylabel, savefile):
+    '''
+    fig, ax = plt.subplots(figsize=(8, 8))
+    ax.set_title(title)
+    ax.set_ylabel(ylabel)
+    ax.set_xlabel(xlabel)
+    for i in cluster_size:
+        ax.scatter(X[y == i, 0], X[y == i, 1], marker='o', edgecolor='black', label='cluster ' + str(i))
+    # sns.scatterplot(X[:,0], X[:,-1])
+    # sns.scatterplot(cluster_centers[:,0], cluster_centers[:,1], color='red', edgecolor='black', marker='*', label='cluster centers')
+    ax.scatter(cluster_centers[:, 0], cluster_centers[:, 1], color='red', edgecolor='black', marker='*', label='centroids')
+    ax.legend(loc='best')
+    '''
+    colors = sns.color_palette('husl', n_colors=len(cluster_size))
+    cmap = dict(zip(cluster_size, colors))
+
     plt.figure()
     plt.title(title)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
-    plt.bar(labels.keys(), labels.values, width=0.2)
+    '''
+    for i in cluster_size:
+        plt.scatter(X[y == i, 0], X[y == i, 1], s=50, marker='o', edgecolor='black', label='cluster ' + str(i))
+    plt.scatter(cluster_centers[:, 0], cluster_centers[:, 1], s=250, color='yellow', edgecolor='black', marker='*',
+               label='centroids')
+    '''
+    plt.legend(loc='best')
+    plt.grid()
     plt.savefig(savefile)
 
 if __name__ == '__main__':
@@ -162,7 +185,8 @@ if __name__ == '__main__':
     scale = MinMaxScaler()
     X_1_scaled = scale.fit_transform(X_1)
     X_2_scaled = scale.fit_transform(X_2)
-    k = np.arange(2, 51)
+    k = np.arange(2, 25)
+    '''
     kMeans(k, X_1_scaled, y_1, dataset_1, random_seed)
     plotSilhouette(2, X_1_scaled, dataset_1, random_seed)
     plotSilhouette(3, X_1_scaled, dataset_1, random_seed)
@@ -184,33 +208,25 @@ if __name__ == '__main__':
     plotSilhouette(19, X_2_scaled, dataset_2, random_seed)
     plotSilhouette(23, X_2_scaled, dataset_2, random_seed)
     '''
-    car - cluster = 4
-    adult - cluster = 2
     '''
-    clf_1 = KMeans(n_clusters=4, init='k-means++', random_state=random_seed)
+    car - cluster = 3
+    2, 8, 10
+    adult - cluster = 2
+    2, 3, 5 
+    '''
+    clf_1 = KMeans(n_clusters=3, init='k-means++', random_state=random_seed)
     clf_2 = KMeans(n_clusters=2, init='k-means++', random_state=random_seed)
     clf_1.fit(X_1_scaled)
     clf_2.fit(X_2_scaled)
     cluster_labels_1 = clf_1.fit_predict(X_1_scaled)
-    cluster_labels_1 = pd.DataFrame(data=cluster_labels_1, columns=['Labels'])
-    cluster_labels_1_counts = cluster_labels_1['Labels'].value_counts()
+    cluster_centers_1 = clf_1.cluster_centers_
+    cluster_size_1 = np.unique(cluster_labels_1)
     cluster_labels_2 = clf_2.fit_predict(X_2_scaled)
-    cluster_labels_2 = pd.DataFrame(data=cluster_labels_2, columns=['Labels'])
-    cluster_labels_2_counts = cluster_labels_2['Labels'].value_counts()
-    title, xlabel, ylabel = ['KMeans - ' + dataset_1, 'Label', 'Count']
-    savefile = 'plots/KMeans_Label_' + dataset_1 + '.png'
-    plotBar(cluster_labels_1_counts, title, xlabel, ylabel, savefile)
-    title, xlabel, ylabel = ['KMeans - ' + dataset_2, 'Label', 'Count']
-    savefile = 'plots/KMeans_Label_' + dataset_2 + '.png'
-    plotBar(cluster_labels_2_counts, title, xlabel, ylabel, savefile)
-    y_1_counts = pd.DataFrame(data=y_1, columns=['Labels'])
-    y_1_counts = y_1_counts['Labels'].value_counts()
-    y_2_counts = pd.DataFrame(data=y_2, columns=['Labels'])
-    y_2_counts = y_2_counts['Labels'].value_counts()
-    title, xlabel, ylabel = ['Car Dataset - ' + dataset_1, 'Label', 'Count']
-    savefile = 'plots/Car_Label_' + dataset_1 + '.png'
-    plotBar(y_1_counts, title, xlabel, ylabel, savefile)
-    title, xlabel, ylabel = ['Adult Dataset - ' + dataset_2, 'Label', 'Count']
-    savefile = 'plots/Adult_Label_' + dataset_2 + '.png'
-    plotBar(y_2_counts, title, xlabel, ylabel, savefile)
-
+    cluster_centers_2 = clf_2.cluster_centers_
+    cluster_size_2 = np.unique(cluster_labels_2)
+    title, xlabel, ylabel = ['KMeans Scatter Plot ' + dataset_1, 'KM1', 'KM2']
+    savefile = 'plots/KMeans_Scatter_Plot_' + str(cluster_size_1) + '_' + dataset_1 + '.png'
+    plotScatter(X_1_scaled, cluster_labels_1, cluster_size_1, cluster_centers_1, title, xlabel, ylabel, savefile)
+    title, xlabel, ylabel = ['KMeans Scatter Plot ' + dataset_2, 'KM1', 'KM2']
+    savefile = 'plots/KMeans_Scatter_Plot_' + str(cluster_size_2) + '_' + dataset_2 + '.png'
+    plotScatter(X_2_scaled, y_2, cluster_size_2, cluster_centers_2, title, xlabel, ylabel, savefile)

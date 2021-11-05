@@ -43,7 +43,7 @@ def loadCarData(filename, col_names):
 
 def kMeans(k, X, y, dataset, random_seed):
     fit_time = []
-    distance = []
+    distortion = []
     sil_score = []
     ami_score = []
     hgy_score = []
@@ -59,16 +59,16 @@ def kMeans(k, X, y, dataset, random_seed):
         fit_tm = fit_end_tm - fit_start_tm
         fit_time.append(fit_tm)
         y_pred = clf.fit_predict(X)
-        distance.append(clf.inertia_)
+        distortion.append(clf.inertia_)
         sil_score.append(metrics.silhouette_score(X, y_pred, metric='euclidean'))
         ami_score.append(metrics.adjusted_mutual_info_score(y, y_pred))
         hgy_score.append(metrics.homogeneity_score(y, y_pred))
         comp_score.append(metrics.completeness_score(y, y_pred))
         v_score.append(metrics.v_measure_score(y, y_pred))
-    title, xlabel, ylabel = ['PCA KMeans Distance - ' + dataset, 'Number Of Clusters', 'Distance']
-    savefile = 'plots/PCA_KMeans_clusters_Distance_' + dataset + '.png'
+    title, xlabel, ylabel = ['PCA KMeans Distortion - ' + dataset, 'Number Of Clusters', 'Distance']
+    savefile = 'plots/PCA_KMeans_Clusters_Distortion_' + dataset + '.png'
     print("Plotting %s for dataset %s " % (title, dataset))
-    plotIndCurves(k, distance, title, xlabel, ylabel, savefile)
+    plotIndCurves(k, distortion, title, xlabel, ylabel, savefile)
     title, xlabel, ylabel = ['PCA KMeans Silhouette Score - ' + dataset, 'Number Of Clusters', 'Silhouette']
     savefile = 'plots/PCA_KMeans_clusters_silhouette_' + dataset + '.png'
     print("Plotting %s for dataset %s " % (title, dataset))
@@ -251,9 +251,11 @@ if __name__ == '__main__':
     '''
         KMeans
         car - cluster = 3
+        3, 7, 9
         adult - cluster = 2
+        2, 3, 4, 9, 11
     '''
-    clf_1 = KMeans(n_clusters=4, init='k-means++', random_state=random_seed)
+    clf_1 = KMeans(n_clusters=3, init='k-means++', random_state=random_seed)
     clf_2 = KMeans(n_clusters=2, init='k-means++', random_state=random_seed)
     clf_1.fit(X_1_dr)
     clf_2.fit(X_2_dr)
@@ -292,10 +294,10 @@ if __name__ == '__main__':
     plotSilhouette(23, X_2_dr, dataset_2, random_seed, cluster)
     '''
         EM
-        car - cluster = 4
+        car - cluster = 3
         adult - cluster = 2
     '''
-    clf_1 = GaussianMixture(n_components=4, random_state=random_seed)
+    clf_1 = GaussianMixture(n_components=3, random_state=random_seed)
     clf_2 = GaussianMixture(n_components=2, random_state=random_seed)
     clf_1.fit(X_1_dr)
     clf_2.fit(X_2_dr)

@@ -103,6 +103,8 @@ if __name__ == '__main__':
                   'activation': ['tanh', 'relu'],
                   'solver': ['sgd', 'adam'],
                   'alpha': [0.0001, 0.01, 0.05], }
+
+    '''
     X_train_pca, X_test_pca, y_train_pca, y_test_pca = trainTestSplit(X_1_pca, y_1, sample_size, random_seed)
     grid_search_pca = gridSearch(grid_param, clf, X_train_pca, y_train_pca, 'accuracy', dataset_1)
 
@@ -114,26 +116,96 @@ if __name__ == '__main__':
 
     X_train_mbdl, X_test_mbdl, y_train_mbdl, y_test_mbdl = trainTestSplit(X_1_mbdl, y_1, sample_size, random_seed)
     grid_search_mbdl = gridSearch(grid_param, clf, X_train_mbdl, y_train_mbdl, 'accuracy', dataset_1)
+    
+    print('PCA Grid Search: ', grid_search_pca)
+    print('ICA Grid Search: ', grid_search_ica)
+    print('GRP Grid Search: ', grid_search_grp)
+    print('MBDL Grid Search: ', grid_search_mbdl)
+    '''
+
+    '''
+    X_train_pca, X_test_pca, y_train_pca, y_test_pca = trainTestSplit(X_2_pca, y_2, sample_size, random_seed)
+    grid_search_pca = gridSearch(grid_param, clf, X_train_pca, y_train_pca, 'accuracy', dataset_2)
+
+    X_train_ica, X_test_ica, y_train_ica, y_test_ica = trainTestSplit(X_2_ica, y_2, sample_size, random_seed)
+    grid_search_ica = gridSearch(grid_param, clf, X_train_ica, y_train_ica, 'accuracy', dataset_2)
+
+    X_train_grp, X_test_grp, y_train_grp, y_test_grp = trainTestSplit(X_2_grp, y_2, sample_size, random_seed)
+    grid_search_grp = gridSearch(grid_param, clf, X_train_grp, y_train_grp, 'accuracy', dataset_2)
+
+    X_train_mbdl, X_test_mbdl, y_train_mbdl, y_test_mbdl = trainTestSplit(X_2_mbdl, y_2, sample_size, random_seed)
+    grid_search_mbdl = gridSearch(grid_param, clf, X_train_mbdl, y_train_mbdl, 'accuracy', dataset_2)
 
     print('PCA Grid Search: ', grid_search_pca)
     print('ICA Grid Search: ', grid_search_ica)
     print('GRP Grid Search: ', grid_search_grp)
     print('MBDL Grid Search: ', grid_search_mbdl)
-
-    # y_pred, y_pred_train, dt_learn_tm, dt_query_tm, dt_query_tm_train, rmse, rmse_train = mlModel(clf, X_train, X_test, y_train, y_test)
-    # X_train, X_test, y_train, y_test = trainTestSplit(X_2_pca, y_2, sample_size, random_seed)
-    # grid_search = gridSearch(grid_param, clf, X_train, y_train, 'accuracy', dataset_2)
-    # print(grid_search)
+    '''
     '''
     Car:
-    ({'activation': 'tanh', 'alpha': 0.05, 'hidden_layer_sizes': (50, 50, 50), 'solver': 'adam'}, 
-        MLPClassifier(activation='tanh', alpha=0.05, hidden_layer_sizes=(50, 50, 50),
+    PCA Grid Search:  ({'activation': 'tanh', 'alpha': 0.05, 'hidden_layer_sizes': (50, 50, 50), 'solver': 'adam'}, MLPClassifier(activation='tanh', alpha=0.05, hidden_layer_sizes=(50, 50, 50),
               random_state=99), 0.7609787044340043)
+    ICA Grid Search:  ({'activation': 'relu', 'alpha': 0.01, 'hidden_layer_sizes': (50, 100, 50), 'solver': 'adam'}, MLPClassifier(alpha=0.01, hidden_layer_sizes=(50, 100, 50), random_state=99), 0.7096704502589075)
+    GRP Grid Search:  ({'activation': 'tanh', 'alpha': 0.05, 'hidden_layer_sizes': (50, 100, 50), 'solver': 'adam'}, MLPClassifier(activation='tanh', alpha=0.05, hidden_layer_sizes=(50, 100, 50),
+              random_state=99), 0.7626315969959878)
+    MBDL Grid Search:  ({'activation': 'relu', 'alpha': 0.0001, 'hidden_layer_sizes': (50, 100, 50), 'solver': 'sgd'}, MLPClassifier(hidden_layer_sizes=(50, 100, 50), random_state=99, solver='sgd'), 0.7030623092486541)
               
     Adult:
-    ({'activation': 'tanh', 'alpha': 0.05, 'hidden_layer_sizes': (50, 50, 50), 'solver': 'adam'}, MLPClassifier(activation='tanh', alpha=0.05, hidden_layer_sizes=(50, 50, 50),
+    PCA Grid Search:  ({'activation': 'tanh', 'alpha': 0.05, 'hidden_layer_sizes': (50, 50, 50), 'solver': 'adam'}, MLPClassifier(activation='tanh', alpha=0.05, hidden_layer_sizes=(50, 50, 50),
               random_state=99), 0.8058089823436296)
+    ICA Grid Search:  ({'activation': 'relu', 'alpha': 0.0001, 'hidden_layer_sizes': (50, 100, 50), 'solver': 'adam'}, MLPClassifier(hidden_layer_sizes=(50, 100, 50), random_state=99), 0.7932605233070654)
+    GRP Grid Search:  ({'activation': 'tanh', 'alpha': 0.05, 'hidden_layer_sizes': (50, 50, 50), 'solver': 'adam'}, MLPClassifier(activation='tanh', alpha=0.05, hidden_layer_sizes=(50, 50, 50),
+              random_state=99), 0.7986134404161863)
+    MBDL Grid Search:  ({'activation': 'relu', 'alpha': 0.0001, 'hidden_layer_sizes': (50, 100, 50), 'solver': 'adam'}, MLPClassifier(hidden_layer_sizes=(50, 100, 50), random_state=99), 0.7966829134392324)
     '''
-    clf_1 = KMeans(n_clusters=4, init='k-means++', random_state=random_seed)
-    clf_2 = KMeans(n_clusters=2, init='k-means++', random_state=random_seed)
+    kmeans_pca = KMeans(n_clusters=3, init='k-means++', random_state=random_seed)
+    em_pca = GaussianMixture(n_components=3, random_state=random_seed)
+    kmeans_ica = KMeans(n_clusters=3, init='k-means++', random_state=random_seed)
+    em_ica = GaussianMixture(n_components=3, random_state=random_seed)
+    kmeans_grp = KMeans(n_clusters=3, init='k-means++', random_state=random_seed)
+    em_grp = GaussianMixture(n_components=3, random_state=random_seed)
+    kmeans_mbdl = KMeans(n_clusters=3, init='k-means++', random_state=random_seed)
+    em_mbdl = GaussianMixture(n_components=3, random_state=random_seed)
+
+    kmeans_pca.fit(X_1_pca)
+    kmeans_ica.fit(X_1_ica)
+    kmeans_grp.fit(X_1_grp)
+    kmeans_mbdl.fit(X_1_mbdl)
+    labels_pca_km = kmeans_pca.labels_
+    labels_pca_km = pd.DataFrame(data=labels_pca_km, columns=['Labels'])
+    labels_ica_km = kmeans_ica.labels_
+    labels_ica_km = pd.DataFrame(data=labels_ica_km, columns=['Labels'])
+    labels_grp_km = kmeans_grp.labels_
+    labels_grp_km = pd.DataFrame(data=labels_grp_km, columns=['Labels'])
+    labels_mbdl_km = kmeans_mbdl.labels_
+    labels_mbdl_km = pd.DataFrame(data=labels_mbdl_km, columns=['Labels'])
+
+    X_train_pca_km, X_test_pca_km, y_train_pca_km, y_test_pca_km = trainTestSplit(labels_pca_km, y_1, sample_size, random_seed)
+    grid_search_pca_km = gridSearch(grid_param, clf, X_train_pca_km, y_train_pca_km, 'accuracy', dataset_1)
+
+    X_train_ica_km, X_test_ica_km, y_train_ica_km, y_test_ica_km = trainTestSplit(labels_ica_km, y_1, sample_size, random_seed)
+    grid_search_ica_km = gridSearch(grid_param, clf, X_train_ica_km, y_train_ica_km, 'accuracy', dataset_1)
+
+    X_train_grp_km, X_test_grp_km, y_train_grp_km, y_test_grp_km = trainTestSplit(labels_grp_km, y_1, sample_size, random_seed)
+    grid_search_grp_km = gridSearch(grid_param, clf, X_train_grp_km, y_train_grp_km, 'accuracy', dataset_1)
+
+    X_train_mbdl_km, X_test_mbdl_km, y_train_mbdl_km, y_test_mbdl_km = trainTestSplit(labels_mbdl_km, y_1, sample_size, random_seed)
+    grid_search_mbdl_km = gridSearch(grid_param, clf, X_train_mbdl_km, y_train_mbdl_km, 'accuracy', dataset_1)
+
+    print('PCA KMeans Grid Search: ', grid_search_pca_km)
+    print('ICA KMeans Grid Search: ', grid_search_ica_km)
+    print('GRP KMeans Grid Search: ', grid_search_grp_km)
+    print('MBDL KMeans Grid Search: ', grid_search_mbdl_km)
+
+    '''
+    Car:
+    PCA KMeans Grid Search:  ({'activation': 'tanh', 'alpha': 0.0001, 'hidden_layer_sizes': (50, 50, 50), 'solver': 'adam'}, MLPClassifier(activation='tanh', hidden_layer_sizes=(50, 50, 50),
+              random_state=99), 0.7030623092486541)
+    ICA KMeans Grid Search:  ({'activation': 'tanh', 'alpha': 0.0001, 'hidden_layer_sizes': (50, 50, 50), 'solver': 'sgd'}, MLPClassifier(activation='tanh', hidden_layer_sizes=(50, 50, 50),
+              random_state=99, solver='sgd'), 0.7030623092486541)
+    GRP KMeans Grid Search:  ({'activation': 'tanh', 'alpha': 0.0001, 'hidden_layer_sizes': (50, 50, 50), 'solver': 'sgd'}, MLPClassifier(activation='tanh', hidden_layer_sizes=(50, 50, 50),
+              random_state=99, solver='sgd'), 0.7030623092486541)
+    MBDL KMeans Grid Search:  ({'activation': 'tanh', 'alpha': 0.0001, 'hidden_layer_sizes': (50, 50, 50), 'solver': 'adam'}, MLPClassifier(activation='tanh', hidden_layer_sizes=(50, 50, 50),
+              random_state=99), 0.7030623092486541)
+    '''
 
