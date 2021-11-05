@@ -152,6 +152,8 @@ if __name__ == '__main__':
     print('GRP Grid Search: ', grid_search_grp)
     print('MBDL Grid Search: ', grid_search_mbdl)
     '''
+    kmeans = KMeans(n_clusters=3, init='k-means++', random_state=random_seed)
+    em = GaussianMixture(n_components=3, random_state=random_seed)
     kmeans_pca = KMeans(n_clusters=3, init='k-means++', random_state=random_seed)
     kmeans_ica = KMeans(n_clusters=3, init='k-means++', random_state=random_seed)
     kmeans_grp = KMeans(n_clusters=3, init='k-means++', random_state=random_seed)
@@ -161,36 +163,44 @@ if __name__ == '__main__':
     em_grp = GaussianMixture(n_components=3, random_state=random_seed)
     em_mbdl = GaussianMixture(n_components=7, random_state=random_seed)
 
+    kmeans.fit(X_train_1)
     kmeans_pca.fit(X_train_1_pca)
     kmeans_ica.fit(X_train_1_ica)
     kmeans_grp.fit(X_train_1_grp)
     kmeans_mbdl.fit(X_train_1_mbdl)
 
+    X_train_1_km = kmeans.transform(X_train_1)
     X_train_1_pca_km = kmeans_pca.transform(X_train_1_pca)
     X_train_1_ica_km = kmeans_ica.transform(X_train_1_ica)
     X_train_1_grp_km = kmeans_grp.transform(X_train_1_grp)
     X_train_1_mbdl_km = kmeans_mbdl.transform(X_train_1_mbdl)
 
+    X_test_1_km = kmeans.transform(X_test_1)
     X_test_1_pca_km = kmeans_pca.transform(X_test_1_pca)
     X_test_1_ica_km = kmeans_ica.transform(X_test_1_ica)
     X_test_1_grp_km = kmeans_grp.transform(X_test_1_grp)
     X_test_1_mbdl_km = kmeans_mbdl.transform(X_test_1_mbdl)
 
+    em.fit(X_train_1)
     em_pca.fit(X_train_1_pca)
     em_ica.fit(X_train_1_ica)
     em_grp.fit(X_train_1_grp)
     em_mbdl.fit(X_train_1_mbdl)
 
+    X_train_1_em = em.predict_proba(X_train_1)
     X_train_1_pca_em = em_pca.predict_proba(X_train_1_pca)
     X_train_1_ica_em = em_ica.predict_proba(X_train_1_ica)
     X_train_1_grp_em = em_grp.predict_proba(X_train_1_grp)
     X_train_1_mbdl_em = em_mbdl.predict_proba(X_train_1_mbdl)
 
+    X_test_1_em = em.predict_proba(X_test_1)
     X_test_1_pca_em = em_pca.predict_proba(X_test_1_pca)
     X_test_1_ica_em = em_ica.predict_proba(X_test_1_ica)
     X_test_1_grp_em = em_grp.predict_proba(X_test_1_grp)
     X_test_1_mbdl_em = em_mbdl.predict_proba(X_test_1_mbdl)
 
+    grid_search_km = gridSearch(grid_param, clf, X_train_1_km, y_train_1, 'accuracy', dataset_1)
+    grid_search_em = gridSearch(grid_param, clf, X_train_1_em, y_train_1, 'accuracy', dataset_1)
     grid_search_pca = gridSearch(grid_param, clf, X_train_1_pca, y_train_1, 'accuracy', dataset_1)
     grid_search_ica = gridSearch(grid_param, clf, X_train_1_ica, y_train_1, 'accuracy', dataset_1)
     grid_search_grp = gridSearch(grid_param, clf, X_train_1_grp, y_train_1, 'accuracy', dataset_1)
@@ -205,6 +215,8 @@ if __name__ == '__main__':
     grid_search_mbdl_km = gridSearch(grid_param, clf, X_train_1_mbdl_km, y_train_1, 'accuracy', dataset_1)
 
     print('----------------------------------------')
+    print('KMeans Grid Search: ', grid_search_km)
+    print('EM Grid Search: ', grid_search_em)
     print('PCA Grid Search: ', grid_search_pca)
     print('ICA Grid Search: ', grid_search_ica)
     print('GRP Grid Search: ', grid_search_grp)
@@ -235,7 +247,8 @@ if __name__ == '__main__':
         best_clf_grp_em = clf
         best_clf_mbdl_em = clf
     '''
-
+    best_clf_km = grid_search_km[1]
+    best_clf_em = grid_search_em[1]
     best_clf_pca = grid_search_pca[1]
     best_clf_ica = grid_search_ica[1]
     best_clf_grp = grid_search_grp[1]
@@ -249,6 +262,10 @@ if __name__ == '__main__':
     best_clf_grp_em = grid_search_grp_em[1]
     best_clf_mbdl_em = grid_search_mbdl_em[1]
 
+    y_pred_km, y_pred_train_km, learn_tm_km, query_tm_km, query_tm_train_km, rmse_km, rmse_train_km = mlModel(
+        best_clf_km, X_train_1_km, X_test_1_km, y_train_1, y_test_1)
+    y_pred_em, y_pred_train_em, learn_tm_em, query_tm_em, query_tm_train_em, rmse_em, rmse_train_em = mlModel(
+        best_clf_em, X_train_1_em, X_test_1_em, y_train_1, y_test_1)
     y_pred_pca, y_pred_train_pca, learn_tm_pca, query_tm_pca, query_tm_train_pca, rmse_pca, rmse_train_pca = mlModel(
         best_clf_pca, X_train_1_pca, X_test_1_pca, y_train_1, y_test_1)
     y_pred_ica, y_pred_train_ica, learn_tm_ica, query_tm_ica, query_tm_train_ica, rmse_ica, rmse_train_ica = mlModel(
@@ -276,6 +293,18 @@ if __name__ == '__main__':
     y_pred_mbdl_em, y_pred_train_mbdl_em, learn_tm_mbdl_em, query_tm_mbdl_em, query_tm_train_mbdl_em, rmse_mbdl_em, rmse_train_mbdl_em = mlModel(
         best_clf_mbdl_em, X_train_1_mbdl_em, X_test_1_mbdl_em, y_train_1, y_test_1)
 
+    print('----------------------------------------')
+    print("MLP KMeans Accuracy Dataset 1: In Sample", metrics.accuracy_score(y_train_1, y_pred_train_km))
+    print("MLP KMeans Accuracy Dataset 1: Out Sample", metrics.accuracy_score(y_test_1, y_pred_km))
+    print("MLP KMeans Learning Time Dataset 1:", learn_tm_km)
+    print("MLP KMeans Query Time Dataset 1:", query_tm_km)
+    print('----------------------------------------')
+    print('----------------------------------------')
+    print("MLP EM Accuracy Dataset 1: In Sample", metrics.accuracy_score(y_train_1, y_pred_train_em))
+    print("MLP EM Accuracy Dataset 1: Out Sample", metrics.accuracy_score(y_test_1, y_pred_em))
+    print("MLP EM Learning Time Dataset 1:", learn_tm_em)
+    print("MLP EM Query Time Dataset 1:", query_tm_em)
+    print('----------------------------------------')
     print('----------------------------------------')
     print("MLP PCA Accuracy Dataset 1: In Sample", metrics.accuracy_score(y_train_1, y_pred_train_pca))
     print("MLP PCA Accuracy Dataset 1: Out Sample", metrics.accuracy_score(y_test_1, y_pred_pca))
@@ -343,6 +372,10 @@ if __name__ == '__main__':
     '''
     Car:
 ----------------------------------------
+KMeans Grid Search:  ({'activation': 'tanh', 'alpha': 0.0001, 'hidden_layer_sizes': (50, 100, 50), 'solver': 'adam'}, MLPClassifier(activation='tanh', hidden_layer_sizes=(50, 100, 50),
+              random_state=99), 0.7038887555296458)
+EM Grid Search:  ({'activation': 'tanh', 'alpha': 0.0001, 'hidden_layer_sizes': (50, 50, 50), 'solver': 'sgd'}, MLPClassifier(activation='tanh', hidden_layer_sizes=(50, 50, 50),
+              random_state=99, solver='sgd'), 0.7030623092486541)
 PCA Grid Search:  ({'activation': 'tanh', 'alpha': 0.05, 'hidden_layer_sizes': (50, 50, 50), 'solver': 'adam'}, MLPClassifier(activation='tanh', alpha=0.05, hidden_layer_sizes=(50, 50, 50),
               random_state=99), 0.7502314735434312)
 ICA Grid Search:  ({'activation': 'relu', 'alpha': 0.01, 'hidden_layer_sizes': (50, 100, 50), 'solver': 'adam'}, MLPClassifier(alpha=0.01, hidden_layer_sizes=(50, 100, 50), random_state=99), 0.7088577209286375)
@@ -368,69 +401,83 @@ MBDL EM Grid Search:  ({'activation': 'tanh', 'alpha': 0.0001, 'hidden_layer_siz
               random_state=99, solver='sgd'), 0.7030623092486541)
 ----------------------------------------
 
+----------------------------------------
+MLP KMeans Accuracy Dataset 1: In Sample 0.7030603804797353
+MLP KMeans Accuracy Dataset 1: Out Sample 0.6936416184971098
+MLP KMeans Learning Time Dataset 1: 0.6267304420471191
+MLP KMeans Query Time Dataset 1: 0.0019996166229248047
+----------------------------------------
+----------------------------------------
+MLP EM Accuracy Dataset 1: In Sample 0.7030603804797353
+MLP EM Accuracy Dataset 1: Out Sample 0.6936416184971098
+MLP EM Learning Time Dataset 1: 2.853698968887329
+MLP EM Query Time Dataset 1: 0.0020074844360351562
+----------------------------------------
+----------------------------------------
 MLP PCA Accuracy Dataset 1: In Sample 0.7890818858560794
 MLP PCA Accuracy Dataset 1: Out Sample 0.653179190751445
-MLP PCA Learning Time Dataset 1: 3.0513875484466553
-MLP PCA Query Time Dataset 1: 0.0019996166229248047
+MLP PCA Learning Time Dataset 1: 3.0294907093048096
+MLP PCA Query Time Dataset 1: 0.0020189285278320312
 ----------------------------------------
 MLP ICA Accuracy Dataset 1: In Sample 0.7105045492142267
 MLP ICA Accuracy Dataset 1: Out Sample 0.5703275529865125
-MLP ICA Learning Time Dataset 1: 3.76667857170105
-MLP ICA Query Time Dataset 1: 0.0019669532775878906
+MLP ICA Learning Time Dataset 1: 3.6865408420562744
+MLP ICA Query Time Dataset 1: 0.0019974708557128906
 ----------------------------------------
 MLP GRP Accuracy Dataset 1: In Sample 0.7791563275434243
 MLP GRP Accuracy Dataset 1: Out Sample 0.7552986512524085
-MLP GRP Learning Time Dataset 1: 4.194239854812622
-MLP GRP Query Time Dataset 1: 0.0029997825622558594
+MLP GRP Learning Time Dataset 1: 4.129885673522949
+MLP GRP Query Time Dataset 1: 0.003034830093383789
 ----------------------------------------
 MLP MBDL Accuracy Dataset 1: In Sample 0.6699751861042184
 MLP MBDL Accuracy Dataset 1: Out Sample 0.5240847784200385
-MLP MBDL Learning Time Dataset 1: 0.8454082012176514
-MLP MBDL Query Time Dataset 1: 0.0019979476928710938
+MLP MBDL Learning Time Dataset 1: 0.7987163066864014
+MLP MBDL Query Time Dataset 1: 0.0019693374633789062
 ----------------------------------------
 ----------------------------------------
 MLP PCA KMeans Accuracy Dataset 1: In Sample 0.7030603804797353
 MLP PCA KMeans Accuracy Dataset 1: Out Sample 0.6840077071290944
-MLP PCA KMeans Learning Time Dataset 1: 3.5738158226013184
-MLP PCA KMeans Query Time Dataset 1: 0.0019762516021728516
+MLP PCA KMeans Learning Time Dataset 1: 3.4405906200408936
+MLP PCA KMeans Query Time Dataset 1: 0.0019986629486083984
 ----------------------------------------
 MLP ICA KMeans Accuracy Dataset 1: In Sample 0.7030603804797353
 MLP ICA KMeans Accuracy Dataset 1: Out Sample 0.6936416184971098
-MLP ICA KMeans Learning Time Dataset 1: 0.8703763484954834
-MLP ICA KMeans Query Time Dataset 1: 0.0020363330841064453
+MLP ICA KMeans Learning Time Dataset 1: 0.8563556671142578
+MLP ICA KMeans Query Time Dataset 1: 0.0020003318786621094
 ----------------------------------------
 MLP GRP KMeans Accuracy Dataset 1: In Sample 0.7030603804797353
 MLP GRP KMeans Accuracy Dataset 1: Out Sample 0.6936416184971098
-MLP GRP KMeans Learning Time Dataset 1: 2.3734006881713867
-MLP GRP KMeans Query Time Dataset 1: 0.0009655952453613281
+MLP GRP KMeans Learning Time Dataset 1: 2.2791407108306885
+MLP GRP KMeans Query Time Dataset 1: 0.0010008811950683594
 ----------------------------------------
 MLP MBDL KMeans Accuracy Dataset 1: In Sample 0.7030603804797353
 MLP MBDL KMeans Accuracy Dataset 1: Out Sample 0.6936416184971098
-MLP MBDL KMeans Learning Time Dataset 1: 3.6190075874328613
-MLP MBDL KMeans Query Time Dataset 1: 0.002997875213623047
+MLP MBDL KMeans Learning Time Dataset 1: 3.3492400646209717
+MLP MBDL KMeans Query Time Dataset 1: 0.0019989013671875
 ----------------------------------------
 ----------------------------------------
 MLP PCA EM Accuracy Dataset 1: In Sample 0.7030603804797353
 MLP PCA EM Accuracy Dataset 1: Out Sample 0.6936416184971098
-MLP PCA EM Learning Time Dataset 1: 3.1821773052215576
-MLP PCA EM Query Time Dataset 1: 0.002001047134399414
+MLP PCA EM Learning Time Dataset 1: 3.18721866607666
+MLP PCA EM Query Time Dataset 1: 0.001999378204345703
 ----------------------------------------
 MLP ICA EM Accuracy Dataset 1: In Sample 0.7030603804797353
 MLP ICA EM Accuracy Dataset 1: Out Sample 0.6936416184971098
-MLP ICA EM Learning Time Dataset 1: 1.9503438472747803
-MLP ICA EM Query Time Dataset 1: 0.0020003318786621094
+MLP ICA EM Learning Time Dataset 1: 1.8210444450378418
+MLP ICA EM Query Time Dataset 1: 0.0019991397857666016
 ----------------------------------------
 MLP GRP EM Accuracy Dataset 1: In Sample 0.7030603804797353
 MLP GRP EM Accuracy Dataset 1: Out Sample 0.6936416184971098
-MLP GRP EM Learning Time Dataset 1: 0.9249732494354248
-MLP GRP EM Query Time Dataset 1: 0.0019998550415039062
+MLP GRP EM Learning Time Dataset 1: 0.819000244140625
+MLP GRP EM Query Time Dataset 1: 0.002002716064453125
 ----------------------------------------
 MLP MBDL EM Accuracy Dataset 1: In Sample 0.7030603804797353
 MLP MBDL EM Accuracy Dataset 1: Out Sample 0.6936416184971098
-MLP MBDL EM Learning Time Dataset 1: 3.4931564331054688
-MLP MBDL EM Query Time Dataset 1: 0.002001523971557617
+MLP MBDL EM Learning Time Dataset 1: 3.398866653442383
+MLP MBDL EM Query Time Dataset 1: 0.0020313262939453125
 ----------------------------------------
 
 Process finished with exit code 0
+
     '''
 

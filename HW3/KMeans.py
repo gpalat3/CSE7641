@@ -158,12 +158,10 @@ def plotScatter(X, y, cluster_size, cluster_centers, title, xlabel, ylabel, save
     plt.title(title)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
-    '''
     for i in cluster_size:
         plt.scatter(X[y == i, 0], X[y == i, 1], s=50, marker='o', edgecolor='black', label='cluster ' + str(i))
     plt.scatter(cluster_centers[:, 0], cluster_centers[:, 1], s=250, color='yellow', edgecolor='black', marker='*',
                label='centroids')
-    '''
     plt.legend(loc='best')
     plt.grid()
     plt.savefig(savefile)
@@ -186,7 +184,7 @@ if __name__ == '__main__':
     X_1_scaled = scale.fit_transform(X_1)
     X_2_scaled = scale.fit_transform(X_2)
     k = np.arange(2, 25)
-    '''
+
     kMeans(k, X_1_scaled, y_1, dataset_1, random_seed)
     plotSilhouette(2, X_1_scaled, dataset_1, random_seed)
     plotSilhouette(3, X_1_scaled, dataset_1, random_seed)
@@ -207,7 +205,7 @@ if __name__ == '__main__':
     plotSilhouette(10, X_2_scaled, dataset_2, random_seed)
     plotSilhouette(19, X_2_scaled, dataset_2, random_seed)
     plotSilhouette(23, X_2_scaled, dataset_2, random_seed)
-    '''
+
     '''
     car - cluster = 3
     2, 8, 10
