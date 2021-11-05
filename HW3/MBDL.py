@@ -97,13 +97,13 @@ if __name__ == '__main__':
     X_2_scaled = scale.fit_transform(X_2)
     no_features = np.arange(1, 26)
     grpFunc(no_features, X_1_scaled, y_1, dataset_1, random_seed)
-    no_features = np.arange(1, 51)
+    no_features = np.arange(1, 26)
     grpFunc(no_features, X_2_scaled, y_2, dataset_2, random_seed)
     '''
-    car - no of components = 21
+    car - no of components = 9
     adult - no of components = 4
     '''
-    mbdl_1 = MiniBatchDictionaryLearning(n_components=21, random_state=random_seed, batch_size=200, n_iter=100, alpha=1)
+    mbdl_1 = MiniBatchDictionaryLearning(n_components=9, random_state=random_seed, batch_size=200, n_iter=100, alpha=1)
     X_1_mbdl = mbdl_1.fit_transform(X_1_scaled)
     title, xlabel, ylabel = ['MBDL Scatter Plot ' + dataset_1, 'GRP1', 'GRP2']
     savefile = 'plots/MBDL_Scatter_Plot_' + dataset_1 + '.png'

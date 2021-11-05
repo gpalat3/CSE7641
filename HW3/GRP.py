@@ -97,18 +97,20 @@ if __name__ == '__main__':
     X_2_scaled = scale.fit_transform(X_2)
     no_features = np.arange(1, 15)
     grpFunc(no_features, X_1_scaled, y_1, dataset_1, random_seed)
-    no_features = np.arange(1, 51)
+    no_features = np.arange(1, 26)
     grpFunc(no_features, X_2_scaled, y_2, dataset_2, random_seed)
     '''
     car - no of components = 9
+    2, 4, 9
     adult - no of components = 10, 23
+    3, 5, 9, 11
     '''
     grp_1 = GaussianRandomProjection(n_components=9, random_state=random_seed)
     X_1_grp = grp_1.fit_transform(X_1_scaled)
     title, xlabel, ylabel = ['GRP Scatter Plot ' + dataset_1, 'GRP1', 'GRP2']
     savefile = 'plots/GRP_Scatter_Plot_' + dataset_1 + '.png'
     plotScatter(X_1_grp, y_1, title, xlabel, ylabel, savefile)
-    grp_2 = GaussianRandomProjection(n_components=10, random_state=random_seed)
+    grp_2 = GaussianRandomProjection(n_components=9, random_state=random_seed)
     X_2_grp = grp_2.fit_transform(X_2_scaled)
     title, xlabel, ylabel = ['GRP Scatter Plot ' + dataset_2, 'GRP1', 'GRP2']
     savefile = 'plots/GRP_Scatter_Plot_' + dataset_2 + '.png'

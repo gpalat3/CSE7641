@@ -198,14 +198,6 @@ def plotIndCurves(x, y, title, xlabel, ylabel, savefile):
     plt.grid()
     plt.savefig(savefile)
 
-def plotBar(labels, title, xlabel, ylabel, savefile):
-    plt.figure()
-    plt.title(title)
-    plt.xlabel(xlabel)
-    plt.ylabel(ylabel)
-    plt.bar(labels.keys(), labels.values, width=0.2)
-    plt.savefig(savefile)
-
 if __name__ == '__main__':
     dataset_1 = 'car'
     dataset_2 = 'adult'
@@ -259,18 +251,8 @@ if __name__ == '__main__':
     clf_2 = KMeans(n_clusters=2, init='k-means++', random_state=random_seed)
     clf_1.fit(X_1_dr)
     clf_2.fit(X_2_dr)
-    cluster_labels_1 = clf_1.fit_predict(X_1_dr)
-    cluster_labels_1 = pd.DataFrame(data=cluster_labels_1, columns=['Labels'])
-    cluster_labels_1_counts = cluster_labels_1['Labels'].value_counts()
-    cluster_labels_2 = clf_2.fit_predict(X_2_dr)
-    cluster_labels_2 = pd.DataFrame(data=cluster_labels_2, columns=['Labels'])
-    cluster_labels_2_counts = cluster_labels_2['Labels'].value_counts()
-    title, xlabel, ylabel = ['PCA KMeans - ' + dataset_1, 'Label', 'Count']
-    savefile = 'plots/PCA_KMeans_Label_' + dataset_1 + '.png'
-    plotBar(cluster_labels_1_counts, title, xlabel, ylabel, savefile)
-    title, xlabel, ylabel = ['PCA KMeans - ' + dataset_2, 'Label', 'Count']
-    savefile = 'plots/PCA_KMeans_Label_' + dataset_2 + '.png'
-    plotBar(cluster_labels_2_counts, title, xlabel, ylabel, savefile)
+    cluster_labels_1_km = clf_1.fit_predict(X_1_dr)
+    cluster_labels_2_km = clf_2.fit_predict(X_2_dr)
 
     gmm(k, X_1_dr, y_1, dataset_1, random_seed)
     gmm(k, X_2_dr, y_2, dataset_2, random_seed)
@@ -301,15 +283,5 @@ if __name__ == '__main__':
     clf_2 = GaussianMixture(n_components=2, random_state=random_seed)
     clf_1.fit(X_1_dr)
     clf_2.fit(X_2_dr)
-    cluster_labels_1 = clf_1.fit_predict(X_1_dr)
-    cluster_labels_1 = pd.DataFrame(data=cluster_labels_1, columns=['Labels'])
-    cluster_labels_1_counts = cluster_labels_1['Labels'].value_counts()
-    cluster_labels_2 = clf_2.fit_predict(X_2_dr)
-    cluster_labels_2 = pd.DataFrame(data=cluster_labels_2, columns=['Labels'])
-    cluster_labels_2_counts = cluster_labels_2['Labels'].value_counts()
-    title, xlabel, ylabel = ['PCA EM - ' + dataset_1, 'Label', 'Count']
-    savefile = 'plots/PCA_EM_Label_' + dataset_1 + '.png'
-    plotBar(cluster_labels_1_counts, title, xlabel, ylabel, savefile)
-    title, xlabel, ylabel = ['PCA EM - ' + dataset_2, 'Label', 'Count']
-    savefile = 'plots/PCA_EM_Label_' + dataset_2 + '.png'
-    plotBar(cluster_labels_2_counts, title, xlabel, ylabel, savefile)
+    cluster_labels_1_em = clf_1.fit_predict(X_1_dr)
+    cluster_labels_2_em = clf_2.fit_predict(X_2_dr)
