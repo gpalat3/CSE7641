@@ -154,7 +154,7 @@ def plotSilhouette(k, X, dataset, random_seed, cluster):
         y_lower = y_upper + 10
     sil_avg = np.mean(sil_vals)
     ax1.axvline(sil_avg, color="red", linestyle="--")
-    ax1.set_title('KMeans Silhouette Plot ' + dataset)
+    ax1.set_title(cluster + ' Silhouette Plot ' + dataset)
     ax1.set_ylabel('Cluster')
     ax1.set_xlabel('Silhouette Coefficient')
     ax1.set_yticks([])

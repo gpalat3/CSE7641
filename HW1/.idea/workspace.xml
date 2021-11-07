@@ -2,22 +2,60 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1f7ebbae-d5f6-4e8d-9969-9157652528b8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/KMeans_Silhouette_Plot_10_car.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/KMeans_Silhouette_Plot_11_car.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/KMeans_Silhouette_Plot_12_car.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/KMeans_Silhouette_Plot_13_car.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/KMeans_Silhouette_Plot_14_car.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/KMeans_Silhouette_Plot_15_car.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/KMeans_Silhouette_Plot_2_car.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/KMeans_Silhouette_Plot_3_car.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/KMeans_Silhouette_Plot_4_car.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/KMeans_Silhouette_Plot_8_car.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/KMeans_Silhouette_Plot_9_car.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HW3/DataAnalysis.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HW3/gpalat3-analysis.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HW3/~$alat3-analysis.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HW3/~WRL3761.tmp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../HW3/KMeans.py" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/KMeans.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../HW3/NeuralNetwork.py" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/NeuralNetwork.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../HW3/README.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/README.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../HW3/plots/KMeans_fit_times_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/KMeans_fit_times_car.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/GRPWithClustering.py" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/GRPWithClustering.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/ICAWithClustering.py" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/ICAWithClustering.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/MBDLWithClustering.py" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/MBDLWithClustering.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/PCAWithClustering.py" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/PCAWithClustering.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/ICA_EM_Fit_Times_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/ICA_EM_Fit_Times_adult.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/ICA_EM_Fit_Times_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/ICA_EM_Fit_Times_car.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/ICA_KMeans_Fit_Times_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/ICA_KMeans_Fit_Times_adult.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/ICA_KMeans_Fit_Times_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/ICA_KMeans_Fit_Times_car.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/MBDL_KMeans_Fit_Times_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/MBDL_KMeans_Fit_Times_adult.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/MBDL_KMeans_Fit_Times_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/MBDL_KMeans_Fit_Times_car.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/PCA_EM_Fit_Times_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/PCA_EM_Fit_Times_adult.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/PCA_EM_Fit_Times_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/PCA_EM_Fit_Times_car.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/PCA_KMeans_Clusters_Distortion_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/PCA_KMeans_Clusters_Distortion_car.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/PCA_KMeans_Fit_Times_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/PCA_KMeans_Fit_Times_adult.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/PCA_KMeans_Fit_Times_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/PCA_KMeans_Fit_Times_car.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_adult/ICA_EM_Silhouette_Plot_10_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_adult/ICA_EM_Silhouette_Plot_10_adult.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_adult/ICA_EM_Silhouette_Plot_11_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_adult/ICA_EM_Silhouette_Plot_11_adult.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_adult/ICA_EM_Silhouette_Plot_12_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_adult/ICA_EM_Silhouette_Plot_12_adult.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_adult/ICA_EM_Silhouette_Plot_23_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_adult/ICA_EM_Silhouette_Plot_23_adult.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_adult/ICA_EM_Silhouette_Plot_2_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_adult/ICA_EM_Silhouette_Plot_2_adult.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_adult/ICA_EM_Silhouette_Plot_3_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_adult/ICA_EM_Silhouette_Plot_3_adult.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_adult/ICA_EM_Silhouette_Plot_4_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_adult/ICA_EM_Silhouette_Plot_4_adult.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_adult/ICA_EM_Silhouette_Plot_5_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_adult/ICA_EM_Silhouette_Plot_5_adult.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_adult/ICA_EM_Silhouette_Plot_6_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_adult/ICA_EM_Silhouette_Plot_6_adult.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_adult/ICA_EM_Silhouette_Plot_7_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_adult/ICA_EM_Silhouette_Plot_7_adult.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_adult/ICA_EM_Silhouette_Plot_8_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_adult/ICA_EM_Silhouette_Plot_8_adult.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_adult/PCA_EM_Silhouette_Plot_10_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_adult/PCA_EM_Silhouette_Plot_10_adult.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_adult/PCA_EM_Silhouette_Plot_11_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_adult/PCA_EM_Silhouette_Plot_11_adult.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_adult/PCA_EM_Silhouette_Plot_12_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_adult/PCA_EM_Silhouette_Plot_12_adult.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_adult/PCA_EM_Silhouette_Plot_23_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_adult/PCA_EM_Silhouette_Plot_23_adult.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_adult/PCA_EM_Silhouette_Plot_2_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_adult/PCA_EM_Silhouette_Plot_2_adult.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_adult/PCA_EM_Silhouette_Plot_3_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_adult/PCA_EM_Silhouette_Plot_3_adult.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_adult/PCA_EM_Silhouette_Plot_4_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_adult/PCA_EM_Silhouette_Plot_4_adult.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_adult/PCA_EM_Silhouette_Plot_5_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_adult/PCA_EM_Silhouette_Plot_5_adult.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_car/ICA_EM_Silhouette_Plot_10_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/ICA_EM_Silhouette_Plot_10_car.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_car/ICA_EM_Silhouette_Plot_2_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/ICA_EM_Silhouette_Plot_2_car.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_car/ICA_EM_Silhouette_Plot_3_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/ICA_EM_Silhouette_Plot_3_car.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_car/ICA_EM_Silhouette_Plot_4_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/ICA_EM_Silhouette_Plot_4_car.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_car/ICA_EM_Silhouette_Plot_5_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/ICA_EM_Silhouette_Plot_5_car.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_car/ICA_EM_Silhouette_Plot_7_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/ICA_EM_Silhouette_Plot_7_car.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_car/ICA_EM_Silhouette_Plot_8_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/ICA_EM_Silhouette_Plot_8_car.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_car/ICA_EM_Silhouette_Plot_9_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/ICA_EM_Silhouette_Plot_9_car.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_car/PCA_EM_Silhouette_Plot_10_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/PCA_EM_Silhouette_Plot_10_car.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_car/PCA_EM_Silhouette_Plot_2_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/PCA_EM_Silhouette_Plot_2_car.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_car/PCA_EM_Silhouette_Plot_3_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/PCA_EM_Silhouette_Plot_3_car.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_car/PCA_EM_Silhouette_Plot_4_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/PCA_EM_Silhouette_Plot_4_car.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_car/PCA_EM_Silhouette_Plot_7_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/PCA_EM_Silhouette_Plot_7_car.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_car/PCA_EM_Silhouette_Plot_8_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/PCA_EM_Silhouette_Plot_8_car.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_car/PCA_EM_Silhouette_Plot_9_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/PCA_EM_Silhouette_Plot_9_car.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
