@@ -2,26 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1f7ebbae-d5f6-4e8d-9969-9157652528b8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../HW3/gpalat3-analysis.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../HW3/plots/GRP_EM_Fit_Times_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/GRP_EM_Fit_Times_adult.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../HW3/plots/GRP_EM_Fit_Times_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/GRP_EM_Fit_Times_car.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../HW3/plots/GRP_KMeans_Fit_Times_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/GRP_KMeans_Fit_Times_adult.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../HW3/plots/GRP_KMeans_Fit_Times_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/GRP_KMeans_Fit_Times_car.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_adult/GRP_EM_Silhouette_Plot_10_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_adult/GRP_EM_Silhouette_Plot_10_adult.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_adult/GRP_EM_Silhouette_Plot_11_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_adult/GRP_EM_Silhouette_Plot_11_adult.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_adult/GRP_EM_Silhouette_Plot_12_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_adult/GRP_EM_Silhouette_Plot_12_adult.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_adult/GRP_EM_Silhouette_Plot_23_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_adult/GRP_EM_Silhouette_Plot_23_adult.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_adult/GRP_EM_Silhouette_Plot_2_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_adult/GRP_EM_Silhouette_Plot_2_adult.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_adult/GRP_EM_Silhouette_Plot_3_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_adult/GRP_EM_Silhouette_Plot_3_adult.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_adult/GRP_EM_Silhouette_Plot_4_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_adult/GRP_EM_Silhouette_Plot_4_adult.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_adult/GRP_EM_Silhouette_Plot_5_adult.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_adult/GRP_EM_Silhouette_Plot_5_adult.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_car/GRP_EM_Silhouette_Plot_10_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/GRP_EM_Silhouette_Plot_10_car.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_car/GRP_EM_Silhouette_Plot_2_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/GRP_EM_Silhouette_Plot_2_car.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_car/GRP_EM_Silhouette_Plot_3_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/GRP_EM_Silhouette_Plot_3_car.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_car/GRP_EM_Silhouette_Plot_4_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/GRP_EM_Silhouette_Plot_4_car.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_car/GRP_EM_Silhouette_Plot_7_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/GRP_EM_Silhouette_Plot_7_car.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_car/GRP_EM_Silhouette_Plot_8_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/GRP_EM_Silhouette_Plot_8_car.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../HW3/plots/sil_car/GRP_EM_Silhouette_Plot_9_car.png" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/plots/sil_car/GRP_EM_Silhouette_Plot_9_car.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../HW3/gpalat3-analysis.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../HW3/gpalat3-analysis.docx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
