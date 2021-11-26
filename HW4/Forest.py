@@ -322,14 +322,20 @@ if __name__ == '__main__':
     pi = mdp.ValueIteration(T, R, gamma=0.99)
     pi.run()
     print('Ended deriving optimal numbers for PI:')
-    print('Started deriving optimal numbers for Q Learning:')
-    q = mdp.QLearning(T, R, gamma=0.99, alpha=0.1, alpha_decay=0.99999, epsilon=0.95, epsilon_decay=0.9999,
-                      n_iter=1000000)
-    q.run()
-    print('Ended deriving optimal numbers for Q Learning:')
+    print('Started deriving optimal numbers for Q Learning Gamma=0.95:')
+    q_95 = mdp.QLearning(T, R, gamma=0.95, alpha=0.1, alpha_decay=0.99999, epsilon=0.95, epsilon_decay=0.9999,
+                         n_iter=1000000)
+    q_95.run()
+    print('Ended deriving optimal numbers for Q Learning Gamma=0.95:')
+    print('Started deriving optimal numbers for Q Learning Gamma=0.99:')
+    q_99 = mdp.QLearning(T, R, gamma=0.99, alpha=0.1, alpha_decay=0.99999, epsilon=0.95, epsilon_decay=0.9999,
+                         n_iter=1000000)
+    q_99.run()
+    print('Ended deriving optimal numbers for Q Learning Gamma=0.99:')
     print('Value Iteration Policy:', vi.policy)
     print('Policy Iteration Policy:', pi.policy)
-    print('Q Learning Policy:', q.policy)
+    print('Q Learning Policy Gamma=0.95:', q_95.policy)
+    print('Q Learning Policy Gamma=0.99:', q_99.policy)
 
 '''
 Value Iteration Policy: 
