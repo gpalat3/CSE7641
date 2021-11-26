@@ -284,26 +284,26 @@ if __name__ == '__main__':
     # gamma = [0.8, 0.9, 0.91, 0.92, 0.93, 0.94, 0.95, 0.96, 0.97, 0.98, 0.99]
     gamma = [0.6, 0.7, 0.8, 0.9, 0.93, 0.95, 0.97, 0.99]
     print('Started Value Iteration')
-    # vIter(environment, T, R, gamma, n_episodes, max_iter, size)
+    vIter(environment, T, R, gamma, n_episodes, max_iter, size)
     print('Ended Value Iteration')
     print('Started Policy Iteration')
-    # pIter(environment, T, R, gamma, n_episodes, max_iter, size)
+    pIter(environment, T, R, gamma, n_episodes, max_iter, size)
     print('Started Policy Iteration')
     # gamma = [0.8, 0.99]
     print('Started Q Learning Gamma')
-    # qLearningGamma(T, R, gamma, size)
+    qLearningGamma(T, R, gamma, size)
     print('Ended Q Learning Gamma')
     print('Started Q Learning Alpha')
     alpha = [0.001, 0.01, 0.1, 1]
     gamma = 0.95
     epsilon = 0.95
-    # qLearningAlpha(T, R, gamma, alpha, epsilon, size)
+    qLearningAlpha(T, R, gamma, alpha, epsilon, size)
     print('Ended Q Learning Alpha')
     print('Started Q Learning Epsilon')
     alpha = 0.1
     gamma = 0.95
     epsilon = [0.1, 0.5, 0.9, 0.95, 0.99, 1]
-    # qLearningEpsilon(T, R, gamma, alpha, epsilon, size)
+    qLearningEpsilon(T, R, gamma, alpha, epsilon, size)
     print('Ended Q Learning Epsilon')
     print('Started deriving optimal numbers for VI:')
     vi = mdp.ValueIteration(T, R, gamma=0.99)
@@ -314,10 +314,23 @@ if __name__ == '__main__':
     pi.run()
     print('Ended deriving optimal numbers for PI:')
     print('Started deriving optimal numbers for Q Learning:')
-    q = mdp.QLearning(T, R, gamma=0.95, alpha=0.1, alpha_decay=0.99999, epsilon=0.95, epsilon_decay=0.9999,
+    q_95 = mdp.QLearning(T, R, gamma=0.95, alpha=0.1, alpha_decay=0.99999, epsilon=0.95, epsilon_decay=0.9999,
                       n_iter=1000000)
-    q.run()
+    q_95.run()
+    q_99 = mdp.QLearning(T, R, gamma=0.99, alpha=0.1, alpha_decay=0.99999, epsilon=0.95, epsilon_decay=0.9999,
+                         n_iter=1000000)
+    q_99.run()
     print('Ended deriving optimal numbers for Q Learning:')
     print('Value Iteration Policy:', vi.policy)
     print('Policy Iteration Policy:', pi.policy)
-    print('Q Learning Policy:', q.policy)
+    print('Q Learning Policy Gamma=0.95:', q_95.policy)
+    print('Q Learning Policy Gamma=0.99:', q_99.policy)
+
+'''
+gamma = 0.99 Value Iteration Policy: 
+(0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 3, 3, 3, 3, 3, 1, 1, 0, 0, 0, 0, 0, 0, 2, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 3, 3, 1, 3, 1, 1, 1, 0, 0, 2, 0, 0, 2, 2, 3, 0, 0, 0, 1, 1, 2, 0, 0, 2, 1, 0)
+gamma = 0.99 Policy Iteration Policy: 
+(0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 3, 3, 3, 3, 3, 1, 1, 0, 0, 0, 0, 0, 0, 2, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 3, 3, 1, 3, 1, 1, 1, 0, 0, 2, 0, 0, 2, 2, 3, 0, 0, 0, 1, 1, 2, 0, 0, 2, 1, 0)
+gamma = 0.95 Q Learning Policy: 
+(1, 0, 2, 0, 3, 1, 2, 0, 0, 1, 1, 1, 1, 3, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 2, 1, 0, 0, 0, 0, 0, 3, 2, 1, 0, 3, 1, 0, 0, 0, 2, 1, 1, 1, 3, 0, 0, 0, 3, 0, 2, 2, 2, 0, 0, 0, 2, 3, 3, 0, 0, 2, 1, 0)
+'''
