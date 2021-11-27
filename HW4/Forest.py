@@ -1,6 +1,4 @@
 import numpy as np
-import time
-import tools
 import matplotlib.pyplot as plt
 import gym
 from gym.envs.toy_text.frozen_lake import generate_random_map
