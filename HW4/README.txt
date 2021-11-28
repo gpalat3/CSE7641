@@ -8,7 +8,7 @@ The following libraries are needed prior to running the code. This code can be r
 4) mdptoolbox
 
 The two MDPs are to be run individually.
-If running on the command line, navigate to the path where the files are downloaded (under HW2) and then run the following commands.
+If running on the command line, navigate to the path where the files are downloaded (under HW4) and then run the following commands.
 1) python FrozenLake.py
 2) python Forest.py
 
